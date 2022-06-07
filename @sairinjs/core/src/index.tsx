@@ -88,7 +88,7 @@ export class Sairin {
         ...resultLast.repository.issues.nodes,
       ];
       const listFiltered = uniqBy(list, 'id');
-      console.log('listFiltered', listFiltered.length);
+      // console.log('listFiltered', listFiltered.length);
 
       result.repository.issues.nodes = listFiltered;
     }
