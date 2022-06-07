@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>正则匹配两个字符串之间的内容 - Blog(issues)</title><meta property="og:type" content="artical"/><meta property="og:title" content="正则匹配两个字符串之间的内容"/><meta property="og:image" content="
+        https://og-image.vercel.app/正则匹配两个字符串之间的内容.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta property="article:published_time" content="2021-01-19T06:28:05Z"/><meta property="article:author" content="xiaotiandada"/><meta name="twitter:card" content="正则匹配两个字符串之间的内容"/><meta name="twitter:title" content="正则匹配两个字符串之间的内容"/><meta name="twitter:image" content="
+        https://og-image.vercel.app/正则匹配两个字符串之间的内容.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta name="next-head-count" content="4"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/><link rel="preload" href="/_next/static/css/b78bfc7021c6877d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b78bfc7021c6877d.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-cb7634a8b6194820.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-2190439a97dca295.js" defer=""></script><script src="/_next/static/chunks/pages/_app-2aac380799256b7f.js" defer=""></script><script src="/_next/static/chunks/pages/%5B...path%5D-e0b96643230aac68.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_buildManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_ssgManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><div><div class="container mx-auto mt-24 max-w-2xl px-4 sm:px-0"><div><div class="flex my-8 font-bold"><a href="/">Blog(issues)</a></div></div><div class="mb-8"><div class="text-3xl font-medium">正则匹配两个字符串之间的内容</div><div class="flex mt-4 items-center gap-2"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d&amp;v=4"/><a target="_blank" href="https://github.com/xiaotiandada">xiaotiandada</a><a class="underline text-sm" target="_blank" href="https://github.com/xiaotiandada/blog/issues/35">View on GitHub</a></div><div class="my-8"><div class="flex gap-4 flex-wrap"></div></div></div><div class="post-body"><p>2019-10-12 00:32:54</p>
+<p><a href="http://c.runoob.com/front-end/854">在线工具</a></p>
+<p><strong>匹配A字符与B字符之间的字符(包含AB)</strong></p>
+<p>A.*?B</p>
+<img width="300" src="正则匹配两个字符串之间的内容/1.png">
+
+<p><strong>匹配A字符与B字符之间的字符(包含A不包含B)</strong></p>
+<p>A.*?(?=B)</p>
+<img width="300" src="正则匹配两个字符串之间的内容/2.png">
+
+<p><strong>匹配A字符与B字符之间的字符(不包含AB)</strong></p>
+<p>(?&lt;=A).*?(?=B)</p>
+<img width="300" src="正则匹配两个字符串之间的内容/3.png">
+
+
+
+<hr>
+<blockquote>
+<p>资料</p>
+</blockquote>
+<pre><code>### 正则中的 ?= 、?<= 、?!、 ?<!=
+
+以前看正则的时候遇到?= 、?<=，在网上搜索出来名字有称之为正向预查、负向预查的，有称之为前瞻、后顾的，看用法的话大概知道是怎么回事，但就是记不住啊，对于我来说，这名称太抽象(鬼扯)了。
+
+今天看书看到作者讲到正则，感觉自己又有所领悟，翻出来重新理解了一下。
+
+如今我的理解是这样的，我将<记为方向，包含这个箭头说明是放在目标内容左边的：
+
+1. ```?=``` ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test('bab')
+
+2. ```?<=``` ： 询问是否以这个东西开头  /(?<=a)b/.test('ab')
+
+3. ```?!``` : 询问后面跟着的东西是否不是这个  /b(?!a)/.test('bb')
+
+4. ```?<!=``` ：询问是否不是以这个东西开头  /(?<!=a)b/.test('bb')
+
+其实按照我这样理解的话，```?!``` 后面要是加上```=```就更加符合我的心理预期了，最后还有一点，匹配得到的结果并不包含 ?=、?<=、?!和?<!=里面的内容
+
+### 顺便记录一下
+
+javascript的replace方法的第二个参数，如果是传入的字符串的话，有几个特殊的东西。
+
+1. ```$&`` ： 表示匹配到的结果。'javascript'.replace(/script/, '$&$&') ->  ‘javascriptscript’
+
+2. ```$\```` ： 表示匹配到的结果的左边或者说前面的那一堆字符串。 'javascript'.replace(/script/, '$& 不是 $`')  ->  "javascript 不是 java"
+
+3. ```$'``` ： 表示匹配到的结果的右边或者说后面的那一堆字符串。 '我是猪'.replace(/我是/, "$&$'")  ->   "我是猪猪"
+
+4. ```$$``` ： 表示$字符。
+
+作者：不过从心而已
+链接：https://www.jianshu.com/p/661af704198c
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</code></pre></div><hr class="my-12"/><div class="font-sans"><div class="mb-12"><a target="_blank" href="https://github.com/xiaotiandada/blog/issues/35" class="font-medium border border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-all text-gray-700 text-sm rounded px-4 py-2">Add comment</a></div></div><div class="my-12"><div class="text-sm">Powered by <a class="underline" target="_blank" href="https://github.com/djyde/sairin">Sairin</a></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"id":"MDU6SXNzdWU3ODg3NDU2MzY=","url":"https://github.com/xiaotiandada/blog/issues/35","title":"正则匹配两个字符串之间的内容","updatedAt":"2021-01-19T06:28:05Z","createdAt":"2021-01-19T06:28:05Z","body":"2019-10-12 00:32:54\r\n\r\n[在线工具](http://c.runoob.com/front-end/854)\r\n\r\n**匹配A字符与B字符之间的字符(包含AB)**\r\n\r\nA.*?B\r\n\r\n\u003cimg width=\"300\" src=\"正则匹配两个字符串之间的内容/1.png\"\u003e\r\n\r\n**匹配A字符与B字符之间的字符(包含A不包含B)**\r\n\r\nA.*?(?=B)\r\n\r\n\u003cimg width=\"300\" src=\"正则匹配两个字符串之间的内容/2.png\"\u003e\r\n\r\n**匹配A字符与B字符之间的字符(不包含AB)**\r\n\r\n(?\u003c=A).*?(?=B)\r\n\r\n\u003cimg width=\"300\" src=\"正则匹配两个字符串之间的内容/3.png\"\u003e\r\n\r\n\r\n\r\n---\r\n\u003e 资料\r\n\r\n```\r\n### 正则中的 ?= 、?\u003c= 、?!、 ?\u003c!=\r\n\r\n以前看正则的时候遇到?= 、?\u003c=，在网上搜索出来名字有称之为正向预查、负向预查的，有称之为前瞻、后顾的，看用法的话大概知道是怎么回事，但就是记不住啊，对于我来说，这名称太抽象(鬼扯)了。\r\n\r\n今天看书看到作者讲到正则，感觉自己又有所领悟，翻出来重新理解了一下。\r\n\r\n如今我的理解是这样的，我将\u003c记为方向，包含这个箭头说明是放在目标内容左边的：\r\n\r\n1. ```?=``` ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test('bab')\r\n\r\n2. ```?\u003c=``` ： 询问是否以这个东西开头  /(?\u003c=a)b/.test('ab')\r\n\r\n3. ```?!``` : 询问后面跟着的东西是否不是这个  /b(?!a)/.test('bb')\r\n\r\n4. ```?\u003c!=``` ：询问是否不是以这个东西开头  /(?\u003c!=a)b/.test('bb')\r\n\r\n其实按照我这样理解的话，```?!``` 后面要是加上```=```就更加符合我的心理预期了，最后还有一点，匹配得到的结果并不包含 ?=、?\u003c=、?!和?\u003c!=里面的内容\r\n\r\n### 顺便记录一下\r\n\r\njavascript的replace方法的第二个参数，如果是传入的字符串的话，有几个特殊的东西。\r\n\r\n1. ```$\u0026`` ： 表示匹配到的结果。'javascript'.replace(/script/, '$\u0026$\u0026') -\u003e  ‘javascriptscript’\r\n\r\n2. ```$\\```` ： 表示匹配到的结果的左边或者说前面的那一堆字符串。 'javascript'.replace(/script/, '$\u0026 不是 $`')  -\u003e  \"javascript 不是 java\"\r\n\r\n3. ```$'``` ： 表示匹配到的结果的右边或者说后面的那一堆字符串。 '我是猪'.replace(/我是/, \"$\u0026$'\")  -\u003e   \"我是猪猪\"\r\n\r\n4. ```$$``` ： 表示$字符。\r\n\r\n作者：不过从心而已\r\n链接：https://www.jianshu.com/p/661af704198c\r\n来源：简书\r\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。\r\n```","comments":{"nodes":[]},"reactionGroups":[{"content":"THUMBS_UP","reactors":{"totalCount":0}},{"content":"THUMBS_DOWN","reactors":{"totalCount":0}},{"content":"LAUGH","reactors":{"totalCount":0}},{"content":"HOORAY","reactors":{"totalCount":0}},{"content":"CONFUSED","reactors":{"totalCount":0}},{"content":"HEART","reactors":{"totalCount":0}},{"content":"ROCKET","reactors":{"totalCount":0}},{"content":"EYES","reactors":{"totalCount":0}}],"author":{"login":"xiaotiandada","url":"https://github.com/xiaotiandada","avatarUrl":"https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d\u0026v=4"},"html":"\u003cp\u003e2019-10-12 00:32:54\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://c.runoob.com/front-end/854\"\u003e在线工具\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e匹配A字符与B字符之间的字符(包含AB)\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eA.*?B\u003c/p\u003e\n\u003cimg width=\"300\" src=\"正则匹配两个字符串之间的内容/1.png\"\u003e\n\n\u003cp\u003e\u003cstrong\u003e匹配A字符与B字符之间的字符(包含A不包含B)\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eA.*?(?=B)\u003c/p\u003e\n\u003cimg width=\"300\" src=\"正则匹配两个字符串之间的内容/2.png\"\u003e\n\n\u003cp\u003e\u003cstrong\u003e匹配A字符与B字符之间的字符(不包含AB)\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e(?\u0026lt;=A).*?(?=B)\u003c/p\u003e\n\u003cimg width=\"300\" src=\"正则匹配两个字符串之间的内容/3.png\"\u003e\n\n\n\n\u003chr\u003e\n\u003cblockquote\u003e\n\u003cp\u003e资料\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e### 正则中的 ?= 、?\u003c= 、?!、 ?\u003c!=\n\n以前看正则的时候遇到?= 、?\u003c=，在网上搜索出来名字有称之为正向预查、负向预查的，有称之为前瞻、后顾的，看用法的话大概知道是怎么回事，但就是记不住啊，对于我来说，这名称太抽象(鬼扯)了。\n\n今天看书看到作者讲到正则，感觉自己又有所领悟，翻出来重新理解了一下。\n\n如今我的理解是这样的，我将\u003c记为方向，包含这个箭头说明是放在目标内容左边的：\n\n1. ```?=``` ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test('bab')\n\n2. ```?\u003c=``` ： 询问是否以这个东西开头  /(?\u003c=a)b/.test('ab')\n\n3. ```?!``` : 询问后面跟着的东西是否不是这个  /b(?!a)/.test('bb')\n\n4. ```?\u003c!=``` ：询问是否不是以这个东西开头  /(?\u003c!=a)b/.test('bb')\n\n其实按照我这样理解的话，```?!``` 后面要是加上```=```就更加符合我的心理预期了，最后还有一点，匹配得到的结果并不包含 ?=、?\u003c=、?!和?\u003c!=里面的内容\n\n### 顺便记录一下\n\njavascript的replace方法的第二个参数，如果是传入的字符串的话，有几个特殊的东西。\n\n1. ```$\u0026`` ： 表示匹配到的结果。'javascript'.replace(/script/, '$\u0026$\u0026') -\u003e  ‘javascriptscript’\n\n2. ```$\\```` ： 表示匹配到的结果的左边或者说前面的那一堆字符串。 'javascript'.replace(/script/, '$\u0026 不是 $`')  -\u003e  \"javascript 不是 java\"\n\n3. ```$'``` ： 表示匹配到的结果的右边或者说后面的那一堆字符串。 '我是猪'.replace(/我是/, \"$\u0026$'\")  -\u003e   \"我是猪猪\"\n\n4. ```$$``` ： 表示$字符。\n\n作者：不过从心而已\n链接：https://www.jianshu.com/p/661af704198c\n来源：简书\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。\u003c/code\u003e\u003c/pre\u003e","attributes":{}},"themeConfig":{"title":"Blog(issues)","links":[{"title":"GitHub","url":"https://github.com/xiaotiandada/blog"},{"title":"Twitter","url":"https://twitter.com/XiaoTianIsMe"}]}},"__N_SSG":true},"page":"/[...path]","query":{"path":["MDU6SXNzdWU3ODg3NDU2MzY="]},"buildId":"YPEk3V-eoVeml18YoUSCM","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

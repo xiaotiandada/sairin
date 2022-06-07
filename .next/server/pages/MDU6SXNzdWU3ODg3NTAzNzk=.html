@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Nginx 负载均衡 - Blog(issues)</title><meta property="og:type" content="artical"/><meta property="og:title" content="Nginx 负载均衡"/><meta property="og:image" content="
+        https://og-image.vercel.app/Nginx 负载均衡.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta property="article:published_time" content="2021-01-19T06:37:26Z"/><meta property="article:author" content="xiaotiandada"/><meta name="twitter:card" content="Nginx 负载均衡"/><meta name="twitter:title" content="Nginx 负载均衡"/><meta name="twitter:image" content="
+        https://og-image.vercel.app/Nginx 负载均衡.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta name="next-head-count" content="4"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/><link rel="preload" href="/_next/static/css/b78bfc7021c6877d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b78bfc7021c6877d.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-cb7634a8b6194820.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-2190439a97dca295.js" defer=""></script><script src="/_next/static/chunks/pages/_app-2aac380799256b7f.js" defer=""></script><script src="/_next/static/chunks/pages/%5B...path%5D-e0b96643230aac68.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_buildManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_ssgManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><div><div class="container mx-auto mt-24 max-w-2xl px-4 sm:px-0"><div><div class="flex my-8 font-bold"><a href="/">Blog(issues)</a></div></div><div class="mb-8"><div class="text-3xl font-medium">Nginx 负载均衡</div><div class="flex mt-4 items-center gap-2"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d&amp;v=4"/><a target="_blank" href="https://github.com/xiaotiandada">xiaotiandada</a><a class="underline text-sm" target="_blank" href="https://github.com/xiaotiandada/blog/issues/52">View on GitHub</a></div><div class="my-8"><div class="flex gap-4 flex-wrap"></div></div></div><div class="post-body"><p>2020-07-10 14:39:18</p>
+<h2 id="一、负载均衡---初探">一、负载均衡 - 初探</h2>
+<p><strong>资料参考:</strong> </p>
+<p><a href="https://zhuanlan.zhihu.com/p/89356016">https://zhuanlan.zhihu.com/p/89356016</a></p>
+<p><a href="https://juejin.im/post/5e60edbf5188254940670f75">https://juejin.im/post/5e60edbf5188254940670f75</a></p>
+<!-- more -->
+
+<p>服务器这边使用了 <strong>Nodejs</strong> 分别启两个服务 <strong>7001</strong> <strong>7002</strong>  和 两台机器 启动 <strong>7001</strong></p>
+<p><strong>Nginx</strong> 这边使用 <strong>upstream</strong> </p>
+<p>nginx的upstream目前支持的5种方式的分配</p>
+<p>1、轮询（默认） <strong>本地测试了这种</strong></p>
+<p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</p>
+<pre class="language-nginx"><code class="language-nginx">upstream node { 
+  server 127.0.0.1:7001; 
+  server 127.0.0.1:7002; 
+} </code></pre><p>2 - 4 没有测试过 复制的....</p>
+<p>2、指定权重</p>
+<p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</p>
+<pre class="language-nginx"><code class="language-nginx">upstream backserver { 
+  server 127.0.0.1:7001 weight=8; 
+  server 127.0.0.1:7002 weight=10; 
+} </code></pre><p>3、IP绑定 ip_hash</p>
+<p>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。</p>
+<pre class="language-nginx"><code class="language-nginx">upstream backserver { 
+  ip_hash; 
+  server 127.0.0.1:7001; 
+  server 127.0.0.1:7002; 
+} </code></pre><p>4、fair（第三方）</p>
+<p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
+<pre class="language-nginx"><code class="language-nginx">upstream backserver { 
+  server 127.0.0.1:7001; 
+  server 127.0.0.1:7002; 
+  fair; 
+} </code></pre><p>5、url_hash（第三方）</p>
+<p>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</p>
+<pre class="language-nginx"><code class="language-nginx">upstream backserver { 
+  server 127.0.0.1:7001; 
+  server 127.0.0.1:7002; 
+  hash $request_uri; 
+  hash_method crc32; 
+} </code></pre><blockquote>
+<p>max_fails ：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream 模块定义的错误</p>
+<p>fail_timeout:max_fails次失败后，暂停的时间 (复制的...</p>
+</blockquote>
+<p>在 <strong>Nginx</strong> 定义 测试机</p>
+<pre class="language-nginx"><code class="language-nginx">http {
+    upstream node {
+    server 127.0.0.1:7001;
+    server 192.168.1.11:7002;
+  }
+  
+  # 因为 80 端口别的占用了 开了7000 代理
+  server {
+    listen 7000;
+    server_name localhost;
+
+    location / {
+      proxy_pass http://node;
+    }
+
+  }
+}
+</code></pre><pre class="language-bash"><code class="language-bash">nginx -t
+
+# 如果没有启动先
+nginx
+
+nginx -s reload</code></pre><p>因为 <strong>egg</strong> 定义的 <strong>router</strong> 返回了 <strong>port</strong> 直接访问 <strong>127.0.0.1:7000</strong> 可以查看结果 随机返回 <strong>7001/7002</strong></p>
+<p>测试用了 <strong>jmeter</strong> 但是接口没异常 <strong>jmeter</strong> 倒是g了 使用不太熟练 请求次数太大了 但是效果还是可以看出来的</p>
+</div><hr class="my-12"/><div class="font-sans"><div class="mb-12"><a target="_blank" href="https://github.com/xiaotiandada/blog/issues/52" class="font-medium border border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-all text-gray-700 text-sm rounded px-4 py-2">Add comment</a></div></div><div class="my-12"><div class="text-sm">Powered by <a class="underline" target="_blank" href="https://github.com/djyde/sairin">Sairin</a></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"id":"MDU6SXNzdWU3ODg3NTAzNzk=","url":"https://github.com/xiaotiandada/blog/issues/52","title":"Nginx 负载均衡","updatedAt":"2021-01-19T06:37:26Z","createdAt":"2021-01-19T06:37:26Z","body":"2020-07-10 14:39:18\r\n\r\n## 一、负载均衡 - 初探\r\n\r\n**资料参考:** \r\n\r\nhttps://zhuanlan.zhihu.com/p/89356016\r\n\r\nhttps://juejin.im/post/5e60edbf5188254940670f75\r\n\r\n\u003c!-- more --\u003e\r\n\r\n服务器这边使用了 **Nodejs** 分别启两个服务 **7001** **7002**  和 两台机器 启动 **7001**\r\n\r\n**Nginx** 这边使用 **upstream** \r\n\r\nnginx的upstream目前支持的5种方式的分配\r\n\r\n1、轮询（默认） **本地测试了这种**\r\n\r\n每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。\r\n\r\n```nginx\r\nupstream node { \r\n  server 127.0.0.1:7001; \r\n  server 127.0.0.1:7002; \r\n} \r\n```\r\n\r\n2 - 4 没有测试过 复制的....\r\n\r\n2、指定权重\r\n\r\n指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。\r\n\r\n```nginx\r\nupstream backserver { \r\n  server 127.0.0.1:7001 weight=8; \r\n  server 127.0.0.1:7002 weight=10; \r\n} \r\n```\r\n\r\n3、IP绑定 ip_hash\r\n\r\n每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。\r\n\r\n```nginx\r\nupstream backserver { \r\n  ip_hash; \r\n  server 127.0.0.1:7001; \r\n  server 127.0.0.1:7002; \r\n} \r\n```\r\n\r\n4、fair（第三方）\r\n\r\n按后端服务器的响应时间来分配请求，响应时间短的优先分配。\r\n\r\n```nginx\r\nupstream backserver { \r\n  server 127.0.0.1:7001; \r\n  server 127.0.0.1:7002; \r\n  fair; \r\n} \r\n```\r\n\r\n5、url_hash（第三方）\r\n\r\n按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。\r\n\r\n```nginx\r\nupstream backserver { \r\n  server 127.0.0.1:7001; \r\n  server 127.0.0.1:7002; \r\n  hash $request_uri; \r\n  hash_method crc32; \r\n} \r\n```\r\n\r\n\u003e max_fails ：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream 模块定义的错误\r\n\u003e\r\n\u003e fail_timeout:max_fails次失败后，暂停的时间 (复制的...\r\n\r\n在 **Nginx** 定义 测试机\r\n\r\n```nginx\r\nhttp {\r\n\tupstream node {\r\n    server 127.0.0.1:7001;\r\n    server 192.168.1.11:7002;\r\n  }\r\n  \r\n  # 因为 80 端口别的占用了 开了7000 代理\r\n  server {\r\n    listen 7000;\r\n    server_name localhost;\r\n\r\n    location / {\r\n      proxy_pass http://node;\r\n    }\r\n\r\n  }\r\n}\r\n\r\n```\r\n\r\n```bash\r\nnginx -t\r\n\r\n# 如果没有启动先\r\nnginx\r\n\r\nnginx -s reload\r\n```\r\n\r\n因为 **egg** 定义的 **router** 返回了 **port** 直接访问 **127.0.0.1:7000** 可以查看结果 随机返回 **7001/7002**\r\n\r\n测试用了 **jmeter** 但是接口没异常 **jmeter** 倒是g了 使用不太熟练 请求次数太大了 但是效果还是可以看出来的","comments":{"nodes":[]},"reactionGroups":[{"content":"THUMBS_UP","reactors":{"totalCount":0}},{"content":"THUMBS_DOWN","reactors":{"totalCount":0}},{"content":"LAUGH","reactors":{"totalCount":0}},{"content":"HOORAY","reactors":{"totalCount":0}},{"content":"CONFUSED","reactors":{"totalCount":0}},{"content":"HEART","reactors":{"totalCount":0}},{"content":"ROCKET","reactors":{"totalCount":0}},{"content":"EYES","reactors":{"totalCount":0}}],"author":{"login":"xiaotiandada","url":"https://github.com/xiaotiandada","avatarUrl":"https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d\u0026v=4"},"html":"\u003cp\u003e2020-07-10 14:39:18\u003c/p\u003e\n\u003ch2 id=\"一、负载均衡---初探\"\u003e一、负载均衡 - 初探\u003c/h2\u003e\n\u003cp\u003e\u003cstrong\u003e资料参考:\u003c/strong\u003e \u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://zhuanlan.zhihu.com/p/89356016\"\u003ehttps://zhuanlan.zhihu.com/p/89356016\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://juejin.im/post/5e60edbf5188254940670f75\"\u003ehttps://juejin.im/post/5e60edbf5188254940670f75\u003c/a\u003e\u003c/p\u003e\n\u003c!-- more --\u003e\n\n\u003cp\u003e服务器这边使用了 \u003cstrong\u003eNodejs\u003c/strong\u003e 分别启两个服务 \u003cstrong\u003e7001\u003c/strong\u003e \u003cstrong\u003e7002\u003c/strong\u003e  和 两台机器 启动 \u003cstrong\u003e7001\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eNginx\u003c/strong\u003e 这边使用 \u003cstrong\u003eupstream\u003c/strong\u003e \u003c/p\u003e\n\u003cp\u003enginx的upstream目前支持的5种方式的分配\u003c/p\u003e\n\u003cp\u003e1、轮询（默认） \u003cstrong\u003e本地测试了这种\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。\u003c/p\u003e\n\u003cpre class=\"language-nginx\"\u003e\u003ccode class=\"language-nginx\"\u003eupstream node { \n  server 127.0.0.1:7001; \n  server 127.0.0.1:7002; \n} \u003c/code\u003e\u003c/pre\u003e\u003cp\u003e2 - 4 没有测试过 复制的....\u003c/p\u003e\n\u003cp\u003e2、指定权重\u003c/p\u003e\n\u003cp\u003e指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。\u003c/p\u003e\n\u003cpre class=\"language-nginx\"\u003e\u003ccode class=\"language-nginx\"\u003eupstream backserver { \n  server 127.0.0.1:7001 weight=8; \n  server 127.0.0.1:7002 weight=10; \n} \u003c/code\u003e\u003c/pre\u003e\u003cp\u003e3、IP绑定 ip_hash\u003c/p\u003e\n\u003cp\u003e每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。\u003c/p\u003e\n\u003cpre class=\"language-nginx\"\u003e\u003ccode class=\"language-nginx\"\u003eupstream backserver { \n  ip_hash; \n  server 127.0.0.1:7001; \n  server 127.0.0.1:7002; \n} \u003c/code\u003e\u003c/pre\u003e\u003cp\u003e4、fair（第三方）\u003c/p\u003e\n\u003cp\u003e按后端服务器的响应时间来分配请求，响应时间短的优先分配。\u003c/p\u003e\n\u003cpre class=\"language-nginx\"\u003e\u003ccode class=\"language-nginx\"\u003eupstream backserver { \n  server 127.0.0.1:7001; \n  server 127.0.0.1:7002; \n  fair; \n} \u003c/code\u003e\u003c/pre\u003e\u003cp\u003e5、url_hash（第三方）\u003c/p\u003e\n\u003cp\u003e按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。\u003c/p\u003e\n\u003cpre class=\"language-nginx\"\u003e\u003ccode class=\"language-nginx\"\u003eupstream backserver { \n  server 127.0.0.1:7001; \n  server 127.0.0.1:7002; \n  hash $request_uri; \n  hash_method crc32; \n} \u003c/code\u003e\u003c/pre\u003e\u003cblockquote\u003e\n\u003cp\u003emax_fails ：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream 模块定义的错误\u003c/p\u003e\n\u003cp\u003efail_timeout:max_fails次失败后，暂停的时间 (复制的...\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e在 \u003cstrong\u003eNginx\u003c/strong\u003e 定义 测试机\u003c/p\u003e\n\u003cpre class=\"language-nginx\"\u003e\u003ccode class=\"language-nginx\"\u003ehttp {\n    upstream node {\n    server 127.0.0.1:7001;\n    server 192.168.1.11:7002;\n  }\n  \n  # 因为 80 端口别的占用了 开了7000 代理\n  server {\n    listen 7000;\n    server_name localhost;\n\n    location / {\n      proxy_pass http://node;\n    }\n\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-bash\"\u003e\u003ccode class=\"language-bash\"\u003enginx -t\n\n# 如果没有启动先\nnginx\n\nnginx -s reload\u003c/code\u003e\u003c/pre\u003e\u003cp\u003e因为 \u003cstrong\u003eegg\u003c/strong\u003e 定义的 \u003cstrong\u003erouter\u003c/strong\u003e 返回了 \u003cstrong\u003eport\u003c/strong\u003e 直接访问 \u003cstrong\u003e127.0.0.1:7000\u003c/strong\u003e 可以查看结果 随机返回 \u003cstrong\u003e7001/7002\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e测试用了 \u003cstrong\u003ejmeter\u003c/strong\u003e 但是接口没异常 \u003cstrong\u003ejmeter\u003c/strong\u003e 倒是g了 使用不太熟练 请求次数太大了 但是效果还是可以看出来的\u003c/p\u003e\n","attributes":{}},"themeConfig":{"title":"Blog(issues)","links":[{"title":"GitHub","url":"https://github.com/xiaotiandada/blog"},{"title":"Twitter","url":"https://twitter.com/XiaoTianIsMe"}]}},"__N_SSG":true},"page":"/[...path]","query":{"path":["MDU6SXNzdWU3ODg3NTAzNzk="]},"buildId":"YPEk3V-eoVeml18YoUSCM","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

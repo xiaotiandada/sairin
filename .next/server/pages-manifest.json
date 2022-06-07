@@ -2,6 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/[...path]": "pages/[...path].js",
+  "/api/rss": "pages/api/rss.js",
   "/": "pages/index.js",
-  "/[...path]": "pages/[...path].js"
+  "/404": "pages/404.html"
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>卡片翻转动效 - Blog(issues)</title><meta property="og:type" content="artical"/><meta property="og:title" content="卡片翻转动效"/><meta property="og:image" content="
+        https://og-image.vercel.app/卡片翻转动效.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta property="article:published_time" content="2021-01-19T04:56:49Z"/><meta property="article:author" content="xiaotiandada"/><meta name="twitter:card" content="卡片翻转动效"/><meta name="twitter:title" content="卡片翻转动效"/><meta name="twitter:image" content="
+        https://og-image.vercel.app/卡片翻转动效.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta name="next-head-count" content="4"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/><link rel="preload" href="/_next/static/css/b78bfc7021c6877d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b78bfc7021c6877d.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-cb7634a8b6194820.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-2190439a97dca295.js" defer=""></script><script src="/_next/static/chunks/pages/_app-2aac380799256b7f.js" defer=""></script><script src="/_next/static/chunks/pages/%5B...path%5D-e0b96643230aac68.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_buildManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_ssgManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><div><div class="container mx-auto mt-24 max-w-2xl px-4 sm:px-0"><div><div class="flex my-8 font-bold"><a href="/">Blog(issues)</a></div></div><div class="mb-8"><div class="text-3xl font-medium">卡片翻转动效</div><div class="flex mt-4 items-center gap-2"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d&amp;v=4"/><a target="_blank" href="https://github.com/xiaotiandada">xiaotiandada</a><a class="underline text-sm" target="_blank" href="https://github.com/xiaotiandada/blog/issues/6">View on GitHub</a></div><div class="my-8"><div class="flex gap-4 flex-wrap"></div></div></div><div class="post-body"><p>2018-06-07 22:34:02</p>
+<h3 id="卡片翻转动效">卡片翻转动效</h3>
+<p><a href="http://ife.baidu.com/course/all">地址</a></p>
+<p><a href="https://xiaotiandada.github.io/ife/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%AD%A6%E9%99%A2/No.4/">预览地址</a></p>
+<p><a href="http://www.zhangxinxu.com/study/201209/pictures-3d-slide-view.html">资料</a></p>
+<p><a href="http://ife.baidu.com/course/detail/id/31?t=1528373270979#learn">资料</a></p>
+<p><a href="http://jadyoap.bj.bcebos.com/ife%2F%E4%BB%BB%E5%8A%A1%E5%9B%9B.mov">视频地址</a></p>
+<!-- more -->
+
+<h3 id="效果图">效果图</h3>
+<p><img src="%E5%8D%A1%E7%89%87%E7%BF%BB%E8%BD%AC%E5%8A%A8%E6%95%88/one.png" alt="截图"></p>
+<p><img src="%E5%8D%A1%E7%89%87%E7%BF%BB%E8%BD%AC%E5%8A%A8%E6%95%88/two.png" alt="截图"></p>
+<pre class="language-bash"><code class="language-bash"># html
+<div class="container">
+<div class="box">
+<div class="positive"></div>
+<div class="negative"></div>
+</div>
+</div>
+# css
+
+.box{
+    position: relative;
+    width: 250px;
+    height: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: transform .8s ease-in-out;
+    -moz-transition: transform .8s ease-in-out;
+    transition: transform .8s ease-in-out;
+
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    perspective: 800px;
+}
+.positive,
+.negative{
+    width: 250px;
+    height: 380px;
+    background-size: cover;
+    position: absolute;
+    backface-visibility: hidden;
+    
+}
+
+.positive{
+    transform: rotateY(0deg);
+    background-image: url(../img/正面.jpg);
+}
+.negative{
+    background-image: url(../img/反面.jpg);
+    transform: rotateY(180deg);
+}
+
+.box:hover{
+    transform: rotateY(180deg);        
+}</code></pre></div><hr class="my-12"/><div class="font-sans"><div class="mb-12"><a target="_blank" href="https://github.com/xiaotiandada/blog/issues/6" class="font-medium border border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-all text-gray-700 text-sm rounded px-4 py-2">Add comment</a></div></div><div class="my-12"><div class="text-sm">Powered by <a class="underline" target="_blank" href="https://github.com/djyde/sairin">Sairin</a></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"id":"MDU6SXNzdWU3ODg3MDY2MDA=","url":"https://github.com/xiaotiandada/blog/issues/6","title":"卡片翻转动效","updatedAt":"2021-01-19T04:56:49Z","createdAt":"2021-01-19T04:56:49Z","body":"2018-06-07 22:34:02\r\n\r\n### 卡片翻转动效\r\n\r\n[地址](http://ife.baidu.com/course/all)\r\n\r\n[预览地址](https://xiaotiandada.github.io/ife/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%AD%A6%E9%99%A2/No.4/)\r\n\r\n[资料](http://www.zhangxinxu.com/study/201209/pictures-3d-slide-view.html)\r\n\r\n[资料](http://ife.baidu.com/course/detail/id/31?t=1528373270979#learn)\r\n\r\n[视频地址](http://jadyoap.bj.bcebos.com/ife%2F%E4%BB%BB%E5%8A%A1%E5%9B%9B.mov)\r\n\r\n\u003c!-- more --\u003e\r\n\r\n### 效果图\r\n\r\n![截图](卡片翻转动效/one.png)\r\n\r\n![截图](卡片翻转动效/two.png)\r\n\r\n```bash\r\n# html\r\n\u003cdiv class=\"container\"\u003e\r\n\u003cdiv class=\"box\"\u003e\r\n\u003cdiv class=\"positive\"\u003e\u003c/div\u003e\r\n\u003cdiv class=\"negative\"\u003e\u003c/div\u003e\r\n\u003c/div\u003e\r\n\u003c/div\u003e\r\n# css\r\n\r\n.box{\r\n    position: relative;\r\n    width: 250px;\r\n    height: 380px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    transform: rotateY(0deg);\r\n    -webkit-transform-style: preserve-3d;\r\n    -moz-transform-style: preserve-3d;\r\n    transform-style: preserve-3d;\r\n    -webkit-transition: transform .8s ease-in-out;\r\n    -moz-transition: transform .8s ease-in-out;\r\n    transition: transform .8s ease-in-out;\r\n\r\n    -webkit-perspective: 800px;\r\n    -moz-perspective: 800px;\r\n    perspective: 800px;\r\n}\r\n.positive,\r\n.negative{\r\n    width: 250px;\r\n    height: 380px;\r\n    background-size: cover;\r\n    position: absolute;\r\n    backface-visibility: hidden;\r\n    \r\n}\r\n\r\n.positive{\r\n    transform: rotateY(0deg);\r\n    background-image: url(../img/正面.jpg);\r\n}\r\n.negative{\r\n    background-image: url(../img/反面.jpg);\r\n    transform: rotateY(180deg);\r\n}\r\n\r\n.box:hover{\r\n    transform: rotateY(180deg);        \r\n}\r\n```","comments":{"nodes":[]},"reactionGroups":[{"content":"THUMBS_UP","reactors":{"totalCount":0}},{"content":"THUMBS_DOWN","reactors":{"totalCount":0}},{"content":"LAUGH","reactors":{"totalCount":0}},{"content":"HOORAY","reactors":{"totalCount":0}},{"content":"CONFUSED","reactors":{"totalCount":0}},{"content":"HEART","reactors":{"totalCount":0}},{"content":"ROCKET","reactors":{"totalCount":0}},{"content":"EYES","reactors":{"totalCount":0}}],"author":{"login":"xiaotiandada","url":"https://github.com/xiaotiandada","avatarUrl":"https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d\u0026v=4"},"html":"\u003cp\u003e2018-06-07 22:34:02\u003c/p\u003e\n\u003ch3 id=\"卡片翻转动效\"\u003e卡片翻转动效\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"http://ife.baidu.com/course/all\"\u003e地址\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://xiaotiandada.github.io/ife/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%AD%A6%E9%99%A2/No.4/\"\u003e预览地址\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://www.zhangxinxu.com/study/201209/pictures-3d-slide-view.html\"\u003e资料\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://ife.baidu.com/course/detail/id/31?t=1528373270979#learn\"\u003e资料\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://jadyoap.bj.bcebos.com/ife%2F%E4%BB%BB%E5%8A%A1%E5%9B%9B.mov\"\u003e视频地址\u003c/a\u003e\u003c/p\u003e\n\u003c!-- more --\u003e\n\n\u003ch3 id=\"效果图\"\u003e效果图\u003c/h3\u003e\n\u003cp\u003e\u003cimg src=\"%E5%8D%A1%E7%89%87%E7%BF%BB%E8%BD%AC%E5%8A%A8%E6%95%88/one.png\" alt=\"截图\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"%E5%8D%A1%E7%89%87%E7%BF%BB%E8%BD%AC%E5%8A%A8%E6%95%88/two.png\" alt=\"截图\"\u003e\u003c/p\u003e\n\u003cpre class=\"language-bash\"\u003e\u003ccode class=\"language-bash\"\u003e# html\n\u003cdiv class=\"container\"\u003e\n\u003cdiv class=\"box\"\u003e\n\u003cdiv class=\"positive\"\u003e\u003c/div\u003e\n\u003cdiv class=\"negative\"\u003e\u003c/div\u003e\n\u003c/div\u003e\n\u003c/div\u003e\n# css\n\n.box{\n    position: relative;\n    width: 250px;\n    height: 380px;\n    margin-left: auto;\n    margin-right: auto;\n    transform: rotateY(0deg);\n    -webkit-transform-style: preserve-3d;\n    -moz-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n    -webkit-transition: transform .8s ease-in-out;\n    -moz-transition: transform .8s ease-in-out;\n    transition: transform .8s ease-in-out;\n\n    -webkit-perspective: 800px;\n    -moz-perspective: 800px;\n    perspective: 800px;\n}\n.positive,\n.negative{\n    width: 250px;\n    height: 380px;\n    background-size: cover;\n    position: absolute;\n    backface-visibility: hidden;\n    \n}\n\n.positive{\n    transform: rotateY(0deg);\n    background-image: url(../img/正面.jpg);\n}\n.negative{\n    background-image: url(../img/反面.jpg);\n    transform: rotateY(180deg);\n}\n\n.box:hover{\n    transform: rotateY(180deg);        \n}\u003c/code\u003e\u003c/pre\u003e","attributes":{}},"themeConfig":{"title":"Blog(issues)","links":[{"title":"GitHub","url":"https://github.com/xiaotiandada/blog"},{"title":"Twitter","url":"https://twitter.com/XiaoTianIsMe"}]}},"__N_SSG":true},"page":"/[...path]","query":{"path":["MDU6SXNzdWU3ODg3MDY2MDA="]},"buildId":"YPEk3V-eoVeml18YoUSCM","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

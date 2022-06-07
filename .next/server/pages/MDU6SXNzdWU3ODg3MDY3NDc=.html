@@ -1,0 +1,143 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>CSS3图片旋转木马效果 - Blog(issues)</title><meta property="og:type" content="artical"/><meta property="og:title" content="CSS3图片旋转木马效果"/><meta property="og:image" content="
+        https://og-image.vercel.app/CSS3图片旋转木马效果.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta property="article:published_time" content="2021-01-19T04:57:15Z"/><meta property="article:author" content="xiaotiandada"/><meta name="twitter:card" content="CSS3图片旋转木马效果"/><meta name="twitter:title" content="CSS3图片旋转木马效果"/><meta name="twitter:image" content="
+        https://og-image.vercel.app/CSS3图片旋转木马效果.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta name="next-head-count" content="4"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/><link rel="preload" href="/_next/static/css/b78bfc7021c6877d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b78bfc7021c6877d.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-cb7634a8b6194820.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-2190439a97dca295.js" defer=""></script><script src="/_next/static/chunks/pages/_app-2aac380799256b7f.js" defer=""></script><script src="/_next/static/chunks/pages/%5B...path%5D-e0b96643230aac68.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_buildManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_ssgManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><div><div class="container mx-auto mt-24 max-w-2xl px-4 sm:px-0"><div><div class="flex my-8 font-bold"><a href="/">Blog(issues)</a></div></div><div class="mb-8"><div class="text-3xl font-medium">CSS3图片旋转木马效果</div><div class="flex mt-4 items-center gap-2"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d&amp;v=4"/><a target="_blank" href="https://github.com/xiaotiandada">xiaotiandada</a><a class="underline text-sm" target="_blank" href="https://github.com/xiaotiandada/blog/issues/7">View on GitHub</a></div><div class="my-8"><div class="flex gap-4 flex-wrap"></div></div></div><div class="post-body"><p>2018-06-08 23:48:48</p>
+<h3 id="css3图片旋转木马效果">CSS3图片旋转木马效果</h3>
+<p><a href="https://xiaotiandada.github.io/Case/Anime/CSS3%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%9C%A8%E9%A9%AC%E6%95%88%E6%9E%9C/">模仿demo</a></p>
+<p><a href="http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/">资料</a></p>
+<p><a href="http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/">资料demo</a></p>
+<hr>
+<!-- more -->
+
+
+<p><img src="CSS3%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%9C%A8%E9%A9%AC%E6%95%88%E6%9E%9C/img.png" alt="img"></p>
+<pre class="language-bash"><code class="language-bash"># html
+
+<div class="stage_area">
+  <div class="container" id="container">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+    <img src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" alt="">
+  </div>
+</div>
+
+<div class="stage_button">
+  <button id="prev">上滑</button>
+  <button id="next">下滑</button>
+</div>
+
+# css
+
+.stage_area {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #f0f0f0;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  perspective: 800px;
+  position: relative;
+  padding: 100px 50px;
+  min-height: 100px;
+}
+
+.container {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  width: 128px;
+  height: 100px;
+  left: 50%;
+  margin-left: -64px;
+  position: absolute;
+
+  /* transform: rotateY(40deg); */
+
+  -webkit-transition: transform 1s;
+  -moz-transition: transform 1s;
+  transition: transform 1s;
+}
+
+.container img {
+  position: absolute;
+}
+
+.container img:nth-child(1) {
+  transform: rotateY(0deg) translateZ(195.839px);
+}
+
+.container img:nth-child(2) {
+  transform: rotateY(40deg) translateZ(195.839px);
+}
+
+.container img:nth-child(3) {
+  transform: rotateY(80deg) translateZ(195.839px);
+}
+
+.container img:nth-child(4) {
+  transform: rotateY(120deg) translateZ(195.839px);
+}
+
+.container img:nth-child(5) {
+  transform: rotateY(160deg) translateZ(195.839px);
+}
+
+.container img:nth-child(6) {
+  transform: rotateY(200deg) translateZ(195.839px);
+}
+
+.container img:nth-child(7) {
+  transform: rotateY(240deg) translateZ(195.839px);
+}
+
+.container img:nth-child(8) {
+  transform: rotateY(280deg) translateZ(195.839px);
+}
+
+.container img:nth-child(9) {
+  transform: rotateY(320deg) translateZ(195.839px);
+}
+
+# js
+
+window.onload = init
+function init(){
+  var prev = document.querySelector('#prev')
+  var next = document.querySelector('#next')
+  var container = document.querySelector('#container')
+  var len = 0
+
+  var transform = function(element, value, key) {
+    key = key || "Transform";
+    ["Moz", "O", "Ms", "Webkit", ""].forEach(function(prefix) {
+      element.style[prefix + key] = value;	
+    });	
+    
+    return element;
+  }
+
+  prev.addEventListener('click', function(){
+    var _this = this
+    len-=40
+
+    transform(container, 'rotateY('+ len +'deg)');
+    
+  })
+
+  next.addEventListener('click', function(){
+    var _this = this
+    len+=40
+
+    transform(container, 'rotateY('+ len +'deg)');
+  })
+}</code></pre><hr>
+<p>js部分用了大佬demo的js方法（就是赞！！</p>
+</div><hr class="my-12"/><div class="font-sans"><div class="mb-12"><a target="_blank" href="https://github.com/xiaotiandada/blog/issues/7" class="font-medium border border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-all text-gray-700 text-sm rounded px-4 py-2">Add comment</a></div></div><div class="my-12"><div class="text-sm">Powered by <a class="underline" target="_blank" href="https://github.com/djyde/sairin">Sairin</a></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"id":"MDU6SXNzdWU3ODg3MDY3NDc=","url":"https://github.com/xiaotiandada/blog/issues/7","title":"CSS3图片旋转木马效果","updatedAt":"2021-01-19T04:57:15Z","createdAt":"2021-01-19T04:57:15Z","body":"2018-06-08 23:48:48\r\n\r\n### CSS3图片旋转木马效果\r\n\r\n[模仿demo](https://xiaotiandada.github.io/Case/Anime/CSS3%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%9C%A8%E9%A9%AC%E6%95%88%E6%9E%9C/)\r\n\r\n[资料](http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/)\r\n\r\n[资料demo](http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/)\r\n\r\n---\r\n\r\n\u003c!-- more --\u003e\r\n\r\n\r\n![img](CSS3图片旋转木马效果/img.png)\r\n\r\n``` bash\r\n# html\r\n\r\n\u003cdiv class=\"stage_area\"\u003e\r\n  \u003cdiv class=\"container\" id=\"container\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\r\n  \u003c/div\u003e\r\n\u003c/div\u003e\r\n\r\n\u003cdiv class=\"stage_button\"\u003e\r\n  \u003cbutton id=\"prev\"\u003e上滑\u003c/button\u003e\r\n  \u003cbutton id=\"next\"\u003e下滑\u003c/button\u003e\r\n\u003c/div\u003e\r\n\r\n# css\r\n\r\n.stage_area {\r\n  width: 900px;\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  background: #f0f0f0;\r\n  -webkit-perspective: 800px;\r\n  -moz-perspective: 800px;\r\n  perspective: 800px;\r\n  position: relative;\r\n  padding: 100px 50px;\r\n  min-height: 100px;\r\n}\r\n\r\n.container {\r\n  -webkit-transform-style: preserve-3d;\r\n  -moz-transform-style: preserve-3d;\r\n  transform-style: preserve-3d;\r\n\r\n  width: 128px;\r\n  height: 100px;\r\n  left: 50%;\r\n  margin-left: -64px;\r\n  position: absolute;\r\n\r\n  /* transform: rotateY(40deg); */\r\n\r\n  -webkit-transition: transform 1s;\r\n  -moz-transition: transform 1s;\r\n  transition: transform 1s;\r\n}\r\n\r\n.container img {\r\n  position: absolute;\r\n}\r\n\r\n.container img:nth-child(1) {\r\n  transform: rotateY(0deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(2) {\r\n  transform: rotateY(40deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(3) {\r\n  transform: rotateY(80deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(4) {\r\n  transform: rotateY(120deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(5) {\r\n  transform: rotateY(160deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(6) {\r\n  transform: rotateY(200deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(7) {\r\n  transform: rotateY(240deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(8) {\r\n  transform: rotateY(280deg) translateZ(195.839px);\r\n}\r\n\r\n.container img:nth-child(9) {\r\n  transform: rotateY(320deg) translateZ(195.839px);\r\n}\r\n\r\n# js\r\n\r\nwindow.onload = init\r\nfunction init(){\r\n  var prev = document.querySelector('#prev')\r\n  var next = document.querySelector('#next')\r\n  var container = document.querySelector('#container')\r\n  var len = 0\r\n\r\n  var transform = function(element, value, key) {\r\n    key = key || \"Transform\";\r\n    [\"Moz\", \"O\", \"Ms\", \"Webkit\", \"\"].forEach(function(prefix) {\r\n      element.style[prefix + key] = value;\t\r\n    });\t\r\n    \r\n    return element;\r\n  }\r\n\r\n  prev.addEventListener('click', function(){\r\n    var _this = this\r\n    len-=40\r\n\r\n    transform(container, 'rotateY('+ len +'deg)');\r\n    \r\n  })\r\n\r\n  next.addEventListener('click', function(){\r\n    var _this = this\r\n    len+=40\r\n\r\n    transform(container, 'rotateY('+ len +'deg)');\r\n  })\r\n}\r\n```\r\n\r\n---\r\n\r\njs部分用了大佬demo的js方法（就是赞！！","comments":{"nodes":[]},"reactionGroups":[{"content":"THUMBS_UP","reactors":{"totalCount":0}},{"content":"THUMBS_DOWN","reactors":{"totalCount":0}},{"content":"LAUGH","reactors":{"totalCount":0}},{"content":"HOORAY","reactors":{"totalCount":0}},{"content":"CONFUSED","reactors":{"totalCount":0}},{"content":"HEART","reactors":{"totalCount":0}},{"content":"ROCKET","reactors":{"totalCount":0}},{"content":"EYES","reactors":{"totalCount":0}}],"author":{"login":"xiaotiandada","url":"https://github.com/xiaotiandada","avatarUrl":"https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d\u0026v=4"},"html":"\u003cp\u003e2018-06-08 23:48:48\u003c/p\u003e\n\u003ch3 id=\"css3图片旋转木马效果\"\u003eCSS3图片旋转木马效果\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://xiaotiandada.github.io/Case/Anime/CSS3%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%9C%A8%E9%A9%AC%E6%95%88%E6%9E%9C/\"\u003e模仿demo\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/\"\u003e资料\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/\"\u003e资料demo\u003c/a\u003e\u003c/p\u003e\n\u003chr\u003e\n\u003c!-- more --\u003e\n\n\n\u003cp\u003e\u003cimg src=\"CSS3%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%9C%A8%E9%A9%AC%E6%95%88%E6%9E%9C/img.png\" alt=\"img\"\u003e\u003c/p\u003e\n\u003cpre class=\"language-bash\"\u003e\u003ccode class=\"language-bash\"\u003e# html\n\n\u003cdiv class=\"stage_area\"\u003e\n  \u003cdiv class=\"container\" id=\"container\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n    \u003cimg src=\"http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg\" alt=\"\"\u003e\n  \u003c/div\u003e\n\u003c/div\u003e\n\n\u003cdiv class=\"stage_button\"\u003e\n  \u003cbutton id=\"prev\"\u003e上滑\u003c/button\u003e\n  \u003cbutton id=\"next\"\u003e下滑\u003c/button\u003e\n\u003c/div\u003e\n\n# css\n\n.stage_area {\n  width: 900px;\n  margin-left: auto;\n  margin-right: auto;\n  background: #f0f0f0;\n  -webkit-perspective: 800px;\n  -moz-perspective: 800px;\n  perspective: 800px;\n  position: relative;\n  padding: 100px 50px;\n  min-height: 100px;\n}\n\n.container {\n  -webkit-transform-style: preserve-3d;\n  -moz-transform-style: preserve-3d;\n  transform-style: preserve-3d;\n\n  width: 128px;\n  height: 100px;\n  left: 50%;\n  margin-left: -64px;\n  position: absolute;\n\n  /* transform: rotateY(40deg); */\n\n  -webkit-transition: transform 1s;\n  -moz-transition: transform 1s;\n  transition: transform 1s;\n}\n\n.container img {\n  position: absolute;\n}\n\n.container img:nth-child(1) {\n  transform: rotateY(0deg) translateZ(195.839px);\n}\n\n.container img:nth-child(2) {\n  transform: rotateY(40deg) translateZ(195.839px);\n}\n\n.container img:nth-child(3) {\n  transform: rotateY(80deg) translateZ(195.839px);\n}\n\n.container img:nth-child(4) {\n  transform: rotateY(120deg) translateZ(195.839px);\n}\n\n.container img:nth-child(5) {\n  transform: rotateY(160deg) translateZ(195.839px);\n}\n\n.container img:nth-child(6) {\n  transform: rotateY(200deg) translateZ(195.839px);\n}\n\n.container img:nth-child(7) {\n  transform: rotateY(240deg) translateZ(195.839px);\n}\n\n.container img:nth-child(8) {\n  transform: rotateY(280deg) translateZ(195.839px);\n}\n\n.container img:nth-child(9) {\n  transform: rotateY(320deg) translateZ(195.839px);\n}\n\n# js\n\nwindow.onload = init\nfunction init(){\n  var prev = document.querySelector('#prev')\n  var next = document.querySelector('#next')\n  var container = document.querySelector('#container')\n  var len = 0\n\n  var transform = function(element, value, key) {\n    key = key || \"Transform\";\n    [\"Moz\", \"O\", \"Ms\", \"Webkit\", \"\"].forEach(function(prefix) {\n      element.style[prefix + key] = value;\t\n    });\t\n    \n    return element;\n  }\n\n  prev.addEventListener('click', function(){\n    var _this = this\n    len-=40\n\n    transform(container, 'rotateY('+ len +'deg)');\n    \n  })\n\n  next.addEventListener('click', function(){\n    var _this = this\n    len+=40\n\n    transform(container, 'rotateY('+ len +'deg)');\n  })\n}\u003c/code\u003e\u003c/pre\u003e\u003chr\u003e\n\u003cp\u003ejs部分用了大佬demo的js方法（就是赞！！\u003c/p\u003e\n","attributes":{}},"themeConfig":{"title":"Blog(issues)","links":[{"title":"GitHub","url":"https://github.com/xiaotiandada/blog"},{"title":"Twitter","url":"https://twitter.com/XiaoTianIsMe"}]}},"__N_SSG":true},"page":"/[...path]","query":{"path":["MDU6SXNzdWU3ODg3MDY3NDc="]},"buildId":"YPEk3V-eoVeml18YoUSCM","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

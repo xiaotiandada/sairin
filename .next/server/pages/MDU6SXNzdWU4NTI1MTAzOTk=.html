@@ -1,0 +1,168 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>140 行写一个自动生成 Issues 为 Markdown 文垱 - Blog(issues)</title><meta property="og:type" content="artical"/><meta property="og:title" content="140 行写一个自动生成 Issues 为 Markdown 文垱"/><meta property="og:image" content="
+        https://og-image.vercel.app/140 行写一个自动生成 Issues 为 Markdown 文垱.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta property="article:published_time" content="2021-04-07T15:09:12Z"/><meta property="article:author" content="xiaotiandada"/><meta name="twitter:card" content="140 行写一个自动生成 Issues 为 Markdown 文垱"/><meta name="twitter:title" content="140 行写一个自动生成 Issues 为 Markdown 文垱"/><meta name="twitter:image" content="
+        https://og-image.vercel.app/140 行写一个自动生成 Issues 为 Markdown 文垱.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta name="next-head-count" content="4"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/><link rel="preload" href="/_next/static/css/b78bfc7021c6877d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b78bfc7021c6877d.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-cb7634a8b6194820.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-2190439a97dca295.js" defer=""></script><script src="/_next/static/chunks/pages/_app-2aac380799256b7f.js" defer=""></script><script src="/_next/static/chunks/pages/%5B...path%5D-e0b96643230aac68.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_buildManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_ssgManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><div><div class="container mx-auto mt-24 max-w-2xl px-4 sm:px-0"><div><div class="flex my-8 font-bold"><a href="/">Blog(issues)</a></div></div><div class="mb-8"><div class="text-3xl font-medium">140 行写一个自动生成 Issues 为 Markdown 文垱</div><div class="flex mt-4 items-center gap-2"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d&amp;v=4"/><a target="_blank" href="https://github.com/xiaotiandada">xiaotiandada</a><a class="underline text-sm" target="_blank" href="https://github.com/xiaotiandada/blog/issues/74">View on GitHub</a></div><div class="my-8"><div class="flex gap-4 flex-wrap"></div></div></div><div class="post-body"><p><a href="https://github.com/xiaotiandada/issues">Repo Issues</a></p>
+<ul>
+<li><a href="https://dev.to/github/the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp">the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp</a> 使用<code>secrets.GITHUB_TOKEN</code></li>
+</ul>
+<ol>
+<li><p>生成个人 <a href="https://github.com/settings/tokens">Token</a></p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> octokit <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Octokit</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">auth</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">TOKEN</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// TOKEN=xxx node ./app/index.js</span></code></pre></li>
+<li><p>获取 Repo 数据 主要获取 Name、Issues count 信息，然后获取 Issues 信息</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// 分页处理</span>
+<span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token punctuation">(</span>respo <span class="token keyword">as</span> any<span class="token punctuation">)</span><span class="token punctuation">.</span>open_issues_count
+<span class="token keyword">let</span> per_page <span class="token operator">=</span> <span class="token number">100</span> <span class="token comment">// default 30 max 100</span>
+<span class="token keyword">let</span> len <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>count <span class="token operator">/</span> per_page<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span></code></pre></li>
+<li><p>生成 Markdown</p>
+</li>
+<li><p>Push 内容为 Readme.md</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// push 内容需要 base64</span>
+<span class="token keyword">const</span> contentsBase64 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Buffer</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">'base64'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/24250627/120079607-40149080-c0e7-11eb-8e6a-2db97cf4dae4.png" alt="image"></p>
+<ol start="5">
+<li>使用 GitHub Action 定时更新</li>
+</ol>
+<pre class="language-typescript"><code class="language-typescript">import { Octokit } from '@octokit/rest';
+import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods/dist-types/generated/parameters-and-response-types";
+
+type listForRepoType = RestEndpointMethodTypes["issues"]["listForRepo"]["parameters"]
+
+// https://docs.github.com/en/rest/reference/issues#list-repository-issues
+// https://octokit.github.io/rest.js/v18
+
+const octokit = new Octokit({
+  auth: process.env.TOKEN
+});
+const owner = 'xiaotiandada'
+const repo = 'blog'
+const path = 'README.md'
+
+/**
+ * push markdown
+ * @param contents 文垱内容
+ * @returns
+ */
+const push = async (contents: string) => {
+  try {
+    const { status, data } = await octokit.repos.getContent({
+      owner,
+      repo,
+      path,
+    });
+    // console.log(data)
+
+    if (status !== 200) {
+      console.log('fail', status)
+      return
+    }
+
+    const contentsBase64 = new Buffer(contents).toString('base64');
+    const { status: pushStatus, data: pushData } = await octokit.repos.createOrUpdateFileContents({
+      owner,
+      repo,
+      path,
+      message: `Update ${Date.now()}`,
+      content: contentsBase64,
+      sha: data.sha,
+    });
+    if (pushStatus === 200) {
+    // console.log(pushData)
+      console.log(`push success, url: ${pushData.content.html_url}`)
+    } else {
+      console.log('fail', pushStatus)
+    }
+  } catch (e) {
+    console.log('push', e.toString())
+  }
+}
+/**
+ * process markdown
+ * @param data issues list
+ */
+const processMd = ({data, name, description}: { data: Array<listForRepoType>, name: string, description: string }) => {
+  let md =
+`<div align="center">
+<h1>${name}</h1>
+<p>${description}</p>
+</div>\n\n`
+
+  data.map((i) => {
+    let label = ''
+    let labels: any = i.labels
+    for (let i = 0; i < labels.length; i++) {
+      const ele: { name: string } = labels[i];
+      label += ` ${ele.name} `
+    }
+    // [xxx](xxx) [ xx ]
+    md += `[#${i.number} ${i.title}](${i.html_url}) ${ label ? '[' + label + ']' : '' }\n\n`
+  })
+
+  // console.log('md', md)
+  push(md)
+}
+/**
+ * get repo
+ */
+const getRepo = async () => {
+  try {
+    const { status, data } = await octokit.rest.repos.get({
+      owner,
+      repo,
+    });
+    if (status === 200) {
+      // console.log('data', data)
+      return data
+    } else {
+      console.log('fail', status)
+      return false
+    }
+  } catch (e) {
+    console.log('getRepo', e.toString())
+    return false
+  }
+}
+
+/**
+ * fetch issues
+ */
+const fetch = async () => {
+  try {
+
+    const respo = await getRepo()
+    let count = (respo as any).open_issues_count
+    let per_page = 100 // default 30 max 100
+    let len = Math.floor(count / per_page) + 1
+
+    let list: listForRepoType[] = []
+    for (let i = 1; i <= len; i++) {
+      const { status, data } = await octokit.rest.issues.listForRepo({
+        owner,
+        repo,
+        page: i,
+        per_page: per_page
+      });
+      if (status === 200) {
+        // console.log('data', data)
+        list.push(...(data as any))
+      } else {
+        console.log('fail', status)
+      }
+    }
+
+    processMd({
+      data: list,
+      name: (respo as any).name,
+      description: (respo as any).description,
+    })
+  } catch (e) {
+    console.log('fetch', e.toString())
+  }
+}
+
+fetch()</code></pre></div><hr class="my-12"/><div class="font-sans"><div class="mb-12"><a target="_blank" href="https://github.com/xiaotiandada/blog/issues/74" class="font-medium border border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-all text-gray-700 text-sm rounded px-4 py-2">Add comment</a></div></div><div class="my-12"><div class="text-sm">Powered by <a class="underline" target="_blank" href="https://github.com/djyde/sairin">Sairin</a></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"id":"MDU6SXNzdWU4NTI1MTAzOTk=","url":"https://github.com/xiaotiandada/blog/issues/74","title":"140 行写一个自动生成 Issues 为 Markdown 文垱","updatedAt":"2022-06-07T04:32:11Z","createdAt":"2021-04-07T15:09:12Z","body":"[Repo Issues](https://github.com/xiaotiandada/issues)\r\n\r\n- [the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp](https://dev.to/github/the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp) 使用`secrets.GITHUB_TOKEN`\r\n\r\n\r\n1. 生成个人 [Token](https://github.com/settings/tokens)\r\n\r\n   ```javascript\r\n   const octokit = new Octokit({\r\n     auth: process.env.TOKEN\r\n   });\r\n   \r\n   // TOKEN=xxx node ./app/index.js\r\n   ```\r\n\r\n2. 获取 Repo 数据 主要获取 Name、Issues count 信息，然后获取 Issues 信息\r\n\r\n   ```javascript\r\n   // 分页处理\r\n   let count = (respo as any).open_issues_count\r\n   let per_page = 100 // default 30 max 100\r\n   let len = Math.floor(count / per_page) + 1\r\n   ```\r\n\r\n3. 生成 Markdown\r\n\r\n4. Push 内容为 Readme.md\r\n\r\n   ```javascript\r\n   // push 内容需要 base64\r\n   const contentsBase64 = new Buffer(contents).toString('base64');\r\n   ```\r\n\r\n![image](https://user-images.githubusercontent.com/24250627/120079607-40149080-c0e7-11eb-8e6a-2db97cf4dae4.png)\r\n\r\n5. 使用 GitHub Action 定时更新\r\n\r\n\r\n```typescript\r\nimport { Octokit } from '@octokit/rest';\r\nimport { RestEndpointMethodTypes } from \"@octokit/plugin-rest-endpoint-methods/dist-types/generated/parameters-and-response-types\";\r\n\r\ntype listForRepoType = RestEndpointMethodTypes[\"issues\"][\"listForRepo\"][\"parameters\"]\r\n\r\n// https://docs.github.com/en/rest/reference/issues#list-repository-issues\r\n// https://octokit.github.io/rest.js/v18\r\n\r\nconst octokit = new Octokit({\r\n  auth: process.env.TOKEN\r\n});\r\nconst owner = 'xiaotiandada'\r\nconst repo = 'blog'\r\nconst path = 'README.md'\r\n\r\n/**\r\n * push markdown\r\n * @param contents 文垱内容\r\n * @returns\r\n */\r\nconst push = async (contents: string) =\u003e {\r\n  try {\r\n    const { status, data } = await octokit.repos.getContent({\r\n      owner,\r\n      repo,\r\n      path,\r\n    });\r\n    // console.log(data)\r\n\r\n    if (status !== 200) {\r\n      console.log('fail', status)\r\n      return\r\n    }\r\n\r\n    const contentsBase64 = new Buffer(contents).toString('base64');\r\n    const { status: pushStatus, data: pushData } = await octokit.repos.createOrUpdateFileContents({\r\n      owner,\r\n      repo,\r\n      path,\r\n      message: `Update ${Date.now()}`,\r\n      content: contentsBase64,\r\n      sha: data.sha,\r\n    });\r\n    if (pushStatus === 200) {\r\n    // console.log(pushData)\r\n      console.log(`push success, url: ${pushData.content.html_url}`)\r\n    } else {\r\n      console.log('fail', pushStatus)\r\n    }\r\n  } catch (e) {\r\n    console.log('push', e.toString())\r\n  }\r\n}\r\n/**\r\n * process markdown\r\n * @param data issues list\r\n */\r\nconst processMd = ({data, name, description}: { data: Array\u003clistForRepoType\u003e, name: string, description: string }) =\u003e {\r\n  let md =\r\n`\u003cdiv align=\"center\"\u003e\r\n\u003ch1\u003e${name}\u003c/h1\u003e\r\n\u003cp\u003e${description}\u003c/p\u003e\r\n\u003c/div\u003e\\n\\n`\r\n\r\n  data.map((i) =\u003e {\r\n    let label = ''\r\n    let labels: any = i.labels\r\n    for (let i = 0; i \u003c labels.length; i++) {\r\n      const ele: { name: string } = labels[i];\r\n      label += ` ${ele.name} `\r\n    }\r\n    // [xxx](xxx) [ xx ]\r\n    md += `[#${i.number} ${i.title}](${i.html_url}) ${ label ? '[' + label + ']' : '' }\\n\\n`\r\n  })\r\n\r\n  // console.log('md', md)\r\n  push(md)\r\n}\r\n/**\r\n * get repo\r\n */\r\nconst getRepo = async () =\u003e {\r\n  try {\r\n    const { status, data } = await octokit.rest.repos.get({\r\n      owner,\r\n      repo,\r\n    });\r\n    if (status === 200) {\r\n      // console.log('data', data)\r\n      return data\r\n    } else {\r\n      console.log('fail', status)\r\n      return false\r\n    }\r\n  } catch (e) {\r\n    console.log('getRepo', e.toString())\r\n    return false\r\n  }\r\n}\r\n\r\n/**\r\n * fetch issues\r\n */\r\nconst fetch = async () =\u003e {\r\n  try {\r\n\r\n    const respo = await getRepo()\r\n    let count = (respo as any).open_issues_count\r\n    let per_page = 100 // default 30 max 100\r\n    let len = Math.floor(count / per_page) + 1\r\n\r\n    let list: listForRepoType[] = []\r\n    for (let i = 1; i \u003c= len; i++) {\r\n      const { status, data } = await octokit.rest.issues.listForRepo({\r\n        owner,\r\n        repo,\r\n        page: i,\r\n        per_page: per_page\r\n      });\r\n      if (status === 200) {\r\n        // console.log('data', data)\r\n        list.push(...(data as any))\r\n      } else {\r\n        console.log('fail', status)\r\n      }\r\n    }\r\n\r\n    processMd({\r\n      data: list,\r\n      name: (respo as any).name,\r\n      description: (respo as any).description,\r\n    })\r\n  } catch (e) {\r\n    console.log('fetch', e.toString())\r\n  }\r\n}\r\n\r\nfetch()\r\n```","comments":{"nodes":[]},"reactionGroups":[{"content":"THUMBS_UP","reactors":{"totalCount":0}},{"content":"THUMBS_DOWN","reactors":{"totalCount":0}},{"content":"LAUGH","reactors":{"totalCount":0}},{"content":"HOORAY","reactors":{"totalCount":0}},{"content":"CONFUSED","reactors":{"totalCount":0}},{"content":"HEART","reactors":{"totalCount":0}},{"content":"ROCKET","reactors":{"totalCount":0}},{"content":"EYES","reactors":{"totalCount":0}}],"author":{"login":"xiaotiandada","url":"https://github.com/xiaotiandada","avatarUrl":"https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d\u0026v=4"},"html":"\u003cp\u003e\u003ca href=\"https://github.com/xiaotiandada/issues\"\u003eRepo Issues\u003c/a\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://dev.to/github/the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp\"\u003ethe-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp\u003c/a\u003e 使用\u003ccode\u003esecrets.GITHUB_TOKEN\u003c/code\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003col\u003e\n\u003cli\u003e\u003cp\u003e生成个人 \u003ca href=\"https://github.com/settings/tokens\"\u003eToken\u003c/a\u003e\u003c/p\u003e\n\u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e\u003cspan class=\"token keyword\"\u003econst\u003c/span\u003e octokit \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token keyword\"\u003enew\u003c/span\u003e \u003cspan class=\"token class-name\"\u003eOctokit\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  \u003cspan class=\"token literal-property property\"\u003eauth\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e process\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eenv\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token constant\"\u003eTOKEN\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n\n\u003cspan class=\"token comment\"\u003e// TOKEN=xxx node ./app/index.js\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003cli\u003e\u003cp\u003e获取 Repo 数据 主要获取 Name、Issues count 信息，然后获取 Issues 信息\u003c/p\u003e\n\u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e\u003cspan class=\"token comment\"\u003e// 分页处理\u003c/span\u003e\n\u003cspan class=\"token keyword\"\u003elet\u003c/span\u003e count \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003erespo \u003cspan class=\"token keyword\"\u003eas\u003c/span\u003e any\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eopen_issues_count\n\u003cspan class=\"token keyword\"\u003elet\u003c/span\u003e per_page \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e100\u003c/span\u003e \u003cspan class=\"token comment\"\u003e// default 30 max 100\u003c/span\u003e\n\u003cspan class=\"token keyword\"\u003elet\u003c/span\u003e len \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e Math\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efloor\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ecount \u003cspan class=\"token operator\"\u003e/\u003c/span\u003e per_page\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token operator\"\u003e+\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003cli\u003e\u003cp\u003e生成 Markdown\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003cp\u003ePush 内容为 Readme.md\u003c/p\u003e\n\u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e\u003cspan class=\"token comment\"\u003e// push 内容需要 base64\u003c/span\u003e\n\u003cspan class=\"token keyword\"\u003econst\u003c/span\u003e contentsBase64 \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token keyword\"\u003enew\u003c/span\u003e \u003cspan class=\"token class-name\"\u003eBuffer\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003econtents\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003etoString\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'base64'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\u003c/code\u003e\u003c/pre\u003e\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003cimg src=\"https://user-images.githubusercontent.com/24250627/120079607-40149080-c0e7-11eb-8e6a-2db97cf4dae4.png\" alt=\"image\"\u003e\u003c/p\u003e\n\u003col start=\"5\"\u003e\n\u003cli\u003e使用 GitHub Action 定时更新\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre class=\"language-typescript\"\u003e\u003ccode class=\"language-typescript\"\u003eimport { Octokit } from '@octokit/rest';\nimport { RestEndpointMethodTypes } from \"@octokit/plugin-rest-endpoint-methods/dist-types/generated/parameters-and-response-types\";\n\ntype listForRepoType = RestEndpointMethodTypes[\"issues\"][\"listForRepo\"][\"parameters\"]\n\n// https://docs.github.com/en/rest/reference/issues#list-repository-issues\n// https://octokit.github.io/rest.js/v18\n\nconst octokit = new Octokit({\n  auth: process.env.TOKEN\n});\nconst owner = 'xiaotiandada'\nconst repo = 'blog'\nconst path = 'README.md'\n\n/**\n * push markdown\n * @param contents 文垱内容\n * @returns\n */\nconst push = async (contents: string) =\u003e {\n  try {\n    const { status, data } = await octokit.repos.getContent({\n      owner,\n      repo,\n      path,\n    });\n    // console.log(data)\n\n    if (status !== 200) {\n      console.log('fail', status)\n      return\n    }\n\n    const contentsBase64 = new Buffer(contents).toString('base64');\n    const { status: pushStatus, data: pushData } = await octokit.repos.createOrUpdateFileContents({\n      owner,\n      repo,\n      path,\n      message: `Update ${Date.now()}`,\n      content: contentsBase64,\n      sha: data.sha,\n    });\n    if (pushStatus === 200) {\n    // console.log(pushData)\n      console.log(`push success, url: ${pushData.content.html_url}`)\n    } else {\n      console.log('fail', pushStatus)\n    }\n  } catch (e) {\n    console.log('push', e.toString())\n  }\n}\n/**\n * process markdown\n * @param data issues list\n */\nconst processMd = ({data, name, description}: { data: Array\u003clistForRepoType\u003e, name: string, description: string }) =\u003e {\n  let md =\n`\u003cdiv align=\"center\"\u003e\n\u003ch1\u003e${name}\u003c/h1\u003e\n\u003cp\u003e${description}\u003c/p\u003e\n\u003c/div\u003e\\n\\n`\n\n  data.map((i) =\u003e {\n    let label = ''\n    let labels: any = i.labels\n    for (let i = 0; i \u003c labels.length; i++) {\n      const ele: { name: string } = labels[i];\n      label += ` ${ele.name} `\n    }\n    // [xxx](xxx) [ xx ]\n    md += `[#${i.number} ${i.title}](${i.html_url}) ${ label ? '[' + label + ']' : '' }\\n\\n`\n  })\n\n  // console.log('md', md)\n  push(md)\n}\n/**\n * get repo\n */\nconst getRepo = async () =\u003e {\n  try {\n    const { status, data } = await octokit.rest.repos.get({\n      owner,\n      repo,\n    });\n    if (status === 200) {\n      // console.log('data', data)\n      return data\n    } else {\n      console.log('fail', status)\n      return false\n    }\n  } catch (e) {\n    console.log('getRepo', e.toString())\n    return false\n  }\n}\n\n/**\n * fetch issues\n */\nconst fetch = async () =\u003e {\n  try {\n\n    const respo = await getRepo()\n    let count = (respo as any).open_issues_count\n    let per_page = 100 // default 30 max 100\n    let len = Math.floor(count / per_page) + 1\n\n    let list: listForRepoType[] = []\n    for (let i = 1; i \u003c= len; i++) {\n      const { status, data } = await octokit.rest.issues.listForRepo({\n        owner,\n        repo,\n        page: i,\n        per_page: per_page\n      });\n      if (status === 200) {\n        // console.log('data', data)\n        list.push(...(data as any))\n      } else {\n        console.log('fail', status)\n      }\n    }\n\n    processMd({\n      data: list,\n      name: (respo as any).name,\n      description: (respo as any).description,\n    })\n  } catch (e) {\n    console.log('fetch', e.toString())\n  }\n}\n\nfetch()\u003c/code\u003e\u003c/pre\u003e","attributes":{}},"themeConfig":{"title":"Blog(issues)","links":[{"title":"GitHub","url":"https://github.com/xiaotiandada/blog"},{"title":"Twitter","url":"https://twitter.com/XiaoTianIsMe"}]}},"__N_SSG":true},"page":"/[...path]","query":{"path":["MDU6SXNzdWU4NTI1MTAzOTk="]},"buildId":"YPEk3V-eoVeml18YoUSCM","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

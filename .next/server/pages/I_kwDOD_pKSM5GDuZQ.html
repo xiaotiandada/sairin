@@ -1,0 +1,538 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Uniswap Info 学习 - Blog(issues)</title><meta property="og:type" content="artical"/><meta property="og:title" content="Uniswap Info 学习"/><meta property="og:image" content="
+        https://og-image.vercel.app/Uniswap Info 学习.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta property="article:published_time" content="2022-03-21T13:22:12Z"/><meta property="article:author" content="xiaotiandada"/><meta name="twitter:card" content="Uniswap Info 学习"/><meta name="twitter:title" content="Uniswap Info 学习"/><meta name="twitter:image" content="
+        https://og-image.vercel.app/Uniswap Info 学习.png?theme=light&amp;md=1&amp;fontSize=100px&amp;images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fvercel-triangle-black.svg
+      "/><meta name="next-head-count" content="4"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet"/><link rel="preload" href="/_next/static/css/b78bfc7021c6877d.css" as="style"/><link rel="stylesheet" href="/_next/static/css/b78bfc7021c6877d.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/_next/static/chunks/webpack-cb7634a8b6194820.js" defer=""></script><script src="/_next/static/chunks/framework-5f4595e5518b5600.js" defer=""></script><script src="/_next/static/chunks/main-2190439a97dca295.js" defer=""></script><script src="/_next/static/chunks/pages/_app-2aac380799256b7f.js" defer=""></script><script src="/_next/static/chunks/pages/%5B...path%5D-e0b96643230aac68.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_buildManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_ssgManifest.js" defer=""></script><script src="/_next/static/YPEk3V-eoVeml18YoUSCM/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><div><div class="container mx-auto mt-24 max-w-2xl px-4 sm:px-0"><div><div class="flex my-8 font-bold"><a href="/">Blog(issues)</a></div></div><div class="mb-8"><div class="text-3xl font-medium">Uniswap Info 学习</div><div class="flex mt-4 items-center gap-2"><img class="w-8 h-8 rounded-full" src="https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d&amp;v=4"/><a target="_blank" href="https://github.com/xiaotiandada">xiaotiandada</a><a class="underline text-sm" target="_blank" href="https://github.com/xiaotiandada/blog/issues/92">View on GitHub</a></div><div class="my-8"><div class="flex gap-4 flex-wrap"></div></div></div><div class="post-body"><ul>
+<li><p><a href="https://info.uniswap.org">https://info.uniswap.org</a></p>
+</li>
+<li><p><a href="https://github.com/Uniswap/v3-info">https://github.com/Uniswap/v3-info</a></p>
+</li>
+<li><p><a href="https://github.com/xiaotiandada/vv-info">https://github.com/xiaotiandada/vv-info</a></p>
+</li>
+<li><p>uniswap/uniswap-v3/graphql - <a href="https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3/graphql">https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3/graphql</a></p>
+</li>
+<li><p>blocklytics/ethereum-blocks - <a href="https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks">https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks</a></p>
+</li>
+</ul>
+<h3 id="查询-tokens">查询 Tokens</h3>
+<p>/uniswap/uniswap-v3/graphql</p>
+<pre><code>{
+  tokens {
+    id,
+    symbol,
+    name
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "tokens": [
+      {
+        "id": "0x00000000000045166c45af0fc6e4cf31d9e14b9a",
+        "symbol": "BID",
+        "name": "TopBidder"
+      },
+            // ...
+    ]
+  }
+}</code></pre><h3 id="查询-toppools">查询 topPools</h3>
+<pre><code>query topPools {
+  tokens(
+    first: 50
+    orderBy: totalValueLockedUSD
+    orderDirection: desc
+    subgraphError: allow
+  ) {
+    id
+    name
+    symbol
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "tokens": [
+      {
+        "id": "0x12b32f10a499bf40db334efe04226cca00bf2d9b",
+        "name": "UMIIE COIN",
+        "symbol": "UMIIE",
+        "__typename": "Token"
+      },
+      {
+        "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "__typename": "Token"
+      },
+      // ...
+    ]
+  }
+}</code></pre><h3 id="查询-tokens-1">查询 Tokens</h3>
+<pre><code>query tokens {
+  tokens(
+    where: {id_in: ["0x12b32f10a499bf40db334efe04226cca00bf2d9b", "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"]}
+    block: {number: 14423607}
+    orderBy: totalValueLockedUSD
+    orderDirection: desc
+    subgraphError: allow
+  ) {
+    id
+    symbol
+    name
+    derivedETH
+    volumeUSD
+    volume
+    txCount
+    totalValueLocked
+    feesUSD
+    totalValueLockedUSD
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "tokens": [
+      {
+        "id": "0x12b32f10a499bf40db334efe04226cca00bf2d9b",
+        "symbol": "UMIIE",
+        "name": "UMIIE COIN",
+        "derivedETH": "0.1003902793538328620619869326124331",
+        "volumeUSD": "1511.56963205356389982056338569223",
+        "volume": "1000108.86838829453580011",
+        "txCount": "56",
+        "totalValueLocked": "4060050843.47631394922014061",
+        "feesUSD": "4.103789417232335009489830669286369",
+        "totalValueLockedUSD": "1197081242711.1943889376370393552",
+        "__typename": "Token"
+      },
+      {
+        "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "symbol": "WETH",
+        "name": "Wrapped Ether",
+        "derivedETH": "1",
+        "volumeUSD": "394329036941.5623654027733304210331",
+        "volume": "125103787.712591104192372425",
+        "txCount": "10826685",
+        "totalValueLocked": "441402.825574432888969787",
+        "feesUSD": "766412514.4017064014764513833224189",
+        "totalValueLockedUSD": "1271992049.856639541792290053439463",
+        "__typename": "Token"
+      },
+      {
+        "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "symbol": "USDC",
+        "name": "USD Coin",
+        "derivedETH": "0.00034701696887506600425180887192684",
+        "volumeUSD": "277035127783.0198627557171409059903",
+        "volume": "277026881311.261403",
+        "txCount": "3156306",
+        "totalValueLocked": "1006710296.623717",
+        "feesUSD": "305659059.6247657073983772200408159",
+        "totalValueLockedUSD": "1006710296.623717",
+        "__typename": "Token"
+      }
+    ]
+  }
+}</code></pre><h3 id="查询-blocks">查询 blocks</h3>
+<pre><code>query blocks {
+  t1647783480: blocks(
+    first: 1
+    orderBy: timestamp
+    orderDirection: desc
+    where: {timestamp_gt: 1647783480, timestamp_lt: 1647784080}
+  ) {
+    number
+    __typename
+  }
+  t1647697080: blocks(
+    first: 1
+    orderBy: timestamp
+    orderDirection: desc
+    where: {timestamp_gt: 1647697080, timestamp_lt: 1647697680}
+  ) {
+    number
+    __typename
+  }
+  t1647265080: blocks(
+    first: 1
+    orderBy: timestamp
+    orderDirection: desc
+    where: {timestamp_gt: 1647265080, timestamp_lt: 1647265680}
+  ) {
+    number
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "t1647783480": [
+      {
+        "number": "14423607",
+        "__typename": "Block"
+      }
+    ],
+    "t1647697080": [
+      {
+        "number": "14417197",
+        "__typename": "Block"
+      }
+    ],
+    "t1647265080": [
+      {
+        "number": "14385081",
+        "__typename": "Block"
+      }
+    ]
+  }
+}</code></pre><h3 id="查询-pools">查询 pools</h3>
+<pre><code>query pools {
+  pools(
+    where: {id_in: ["0xa850478adaace4c08fc61de44d8cf3b64f359bec", "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8"]}
+    orderBy: totalValueLockedUSD
+    orderDirection: desc
+    subgraphError: allow
+  ) {
+    id
+    feeTier
+    liquidity
+    sqrtPrice
+    tick
+    token0 {
+      id
+      symbol
+      name
+      decimals
+      derivedETH
+      __typename
+    }
+    token1 {
+      id
+      symbol
+      name
+      decimals
+      derivedETH
+      __typename
+    }
+    token0Price
+    token1Price
+    volumeUSD
+    txCount
+    totalValueLockedToken0
+    totalValueLockedToken1
+    totalValueLockedUSD
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "pools": [
+      {
+        "id": "0xa850478adaace4c08fc61de44d8cf3b64f359bec",
+        "feeTier": "500",
+        "liquidity": "1706245281880037395956227425",
+        "sqrtPrice": "792049440195001924670217089101",
+        "tick": "46048",
+        "token0": {
+          "id": "0x12b32f10a499bf40db334efe04226cca00bf2d9b",
+          "symbol": "UMIIE",
+          "name": "UMIIE COIN",
+          "decimals": "18",
+          "derivedETH": "0.1003902793538328620619869326124331",
+          "__typename": "Token"
+        },
+        "token1": {
+          "id": "0x5ed60a121159481675bad3e648ba4c89753e056f",
+          "symbol": "UMIIE2",
+          "name": "Umiie 2",
+          "decimals": "18",
+          "derivedETH": "0",
+          "__typename": "Token"
+        },
+        "token0Price": "0.01000586374960270227477201921193648",
+        "token1Price": "99.94139686738253752770898237370869",
+        "volumeUSD": "0",
+        "txCount": "9",
+        "totalValueLockedToken0": "50050480.103497613002904654",
+        "totalValueLockedToken1": "14644676667.240849617715772909",
+        "totalValueLockedUSD": "12887625156.60443191907094774602519",
+        "__typename": "Pool"
+      },
+      {
+        "id": "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8",
+        "feeTier": "3000",
+        "liquidity": "13757788412751061547",
+        "sqrtPrice": "1465022049799761266689268933073649",
+        "tick": "196510",
+        "token0": {
+          "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "symbol": "USDC",
+          "name": "USD Coin",
+          "decimals": "6",
+          "derivedETH": "0.0003419236610902688830990355549810135",
+          "__typename": "Token"
+        },
+        "token1": {
+          "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+          "symbol": "WETH",
+          "name": "Wrapped Ether",
+          "decimals": "18",
+          "derivedETH": "1",
+          "__typename": "Token"
+        },
+        "token0Price": "2924.629424039762397178342690644415",
+        "token1Price": "0.0003419236610902688830990355549810135",
+        "volumeUSD": "46675235734.17557247596178718271208",
+        "txCount": "300573",
+        "totalValueLockedToken0": "184459973.048114",
+        "totalValueLockedToken1": "76505.849041123104288281",
+        "totalValueLockedUSD": "408211230.2649268727637666561467565",
+        "__typename": "Pool"
+      }
+    ]
+  }
+}</code></pre><h3 id="查询-prices">查询 prices</h3>
+<pre><code>query prices {
+  current: bundles(first: 1, subgraphError: allow) {
+    ethPriceUSD
+    __typename
+  }
+  oneDay: bundles(first: 1, block: {number: 14423607}, subgraphError: allow) {
+    ethPriceUSD
+    __typename
+  }
+  twoDay: bundles(first: 1, block: {number: 14417197}, subgraphError: allow) {
+    ethPriceUSD
+    __typename
+  }
+  oneWeek: bundles(first: 1, block: {number: 14385081}, subgraphError: allow) {
+    ethPriceUSD
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "current": [
+      {
+        "ethPriceUSD": "2911.900514205906596528906408766284",
+        "__typename": "Bundle"
+      }
+    ],
+    "oneDay": [
+      {
+        "ethPriceUSD": "2881.703460328542976410568122182245",
+        "__typename": "Bundle"
+      }
+    ],
+    "twoDay": [
+      {
+        "ethPriceUSD": "2957.208390287011377358451424105611",
+        "__typename": "Bundle"
+      }
+    ],
+    "oneWeek": [
+      {
+        "ethPriceUSD": "2566.212421242889978064374895815068",
+        "__typename": "Bundle"
+      }
+    ]
+  }
+}</code></pre><h3 id="查询-transactions">查询 transactions</h3>
+<pre><code>query transactions {
+  transactions(
+    first: 500
+    orderBy: timestamp
+    orderDirection: desc
+    subgraphError: allow
+  ) {
+    id
+    timestamp
+    mints {
+      pool {
+        token0 {
+          id
+          symbol
+          __typename
+        }
+        token1 {
+          id
+          symbol
+          __typename
+        }
+        __typename
+      }
+      owner
+      sender
+      origin
+      amount0
+      amount1
+      amountUSD
+      __typename
+    }
+    swaps {
+      pool {
+        token0 {
+          id
+          symbol
+          __typename
+        }
+        token1 {
+          id
+          symbol
+          __typename
+        }
+        __typename
+      }
+      origin
+      amount0
+      amount1
+      amountUSD
+      __typename
+    }
+    burns {
+      pool {
+        token0 {
+          id
+          symbol
+          __typename
+        }
+        token1 {
+          id
+          symbol
+          __typename
+        }
+        __typename
+      }
+      owner
+      origin
+      amount0
+      amount1
+      amountUSD
+      __typename
+    }
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "transactions": [
+      {
+        "id": "0xd87658f56454d4bccf363af8ed720e19990d3c7a02939320ae59258fbef2aa0a",
+        "timestamp": "1647872333",
+        "mints": [],
+        "swaps": [
+          {
+            "pool": {
+              "token0": {
+                "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                "symbol": "USDC",
+                "__typename": "Token"
+              },
+              "token1": {
+                "id": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                "symbol": "WETH",
+                "__typename": "Token"
+              },
+              "__typename": "Pool"
+            },
+            "origin": "0x6e5dac0408d313c3adb78c671741df7a1944f9d5",
+            "amount0": "838.639246",
+            "amount1": "-0.288308585496447514",
+            "amountUSD": "839.082582178541550390129466135908",
+            "__typename": "Swap"
+          },
+          {
+            "pool": {
+              "token0": {
+                "id": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+                "symbol": "USDC",
+                "__typename": "Token"
+              },
+              "token1": {
+                "id": "0xd5d86fc8d5c0ea1ac1ac5dfab6e529c9967a45e9",
+                "symbol": "WRLD",
+                "__typename": "Token"
+              },
+              "__typename": "Pool"
+            },
+            "origin": "0x6e5dac0408d313c3adb78c671741df7a1944f9d5",
+            "amount0": "-838.639246",
+            "amount1": "3500",
+            "amountUSD": "838.639246",
+            "__typename": "Swap"
+          }
+        ],
+        "burns": [],
+        "__typename": "Transaction"
+      }
+    ]
+  }
+}</code></pre><h3 id="查询-uniswapdaydatas">查询 uniswapDayDatas</h3>
+<pre><code>query uniswapDayDatas {
+  uniswapDayDatas(
+    first: 1000
+    skip: 0
+    subgraphError: allow
+    where: {date_gt: 1619170975}
+    orderBy: date
+    orderDirection: asc
+  ) {
+    id
+    date
+    volumeUSD
+    tvlUSD
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "uniswapDayDatas": [
+      {
+        "id": "18751",
+        "date": 1620086400,
+        "volumeUSD": "0",
+        "tvlUSD": "0",
+        "__typename": "UniswapDayData"
+      },
+    ]
+  }
+}</code></pre><h3 id="pooldaydatas">poolDayDatas</h3>
+<pre><code>query poolDayDatas {
+  poolDayDatas(
+    first: 1000
+    skip: 0
+    where: {pool: "0xa850478adaace4c08fc61de44d8cf3b64f359bec", date_gt: 1619170975}
+    orderBy: date
+    orderDirection: asc
+    subgraphError: allow
+  ) {
+    date
+    volumeUSD
+    tvlUSD
+    feesUSD
+    __typename
+  }
+}</code></pre><pre class="language-json"><code class="language-json">{
+  "data": {
+    "poolDayDatas": [
+      {
+        "date": 1625356800,
+        "volumeUSD": "0",
+        "tvlUSD": "0",
+        "feesUSD": "0",
+        "__typename": "PoolDayData"
+      },
+      {
+        "date": 1634342400,
+        "volumeUSD": "0",
+        "tvlUSD": "0",
+        "feesUSD": "0",
+        "__typename": "PoolDayData"
+      },
+      {
+        "date": 1646611200,
+        "volumeUSD": "0",
+        "tvlUSD": "261269729093.816542194433000739702",
+        "feesUSD": "0",
+        "__typename": "PoolDayData"
+      },
+      {
+        "date": 1646697600,
+        "volumeUSD": "0",
+        "tvlUSD": "12887625156.60443191907094774602519",
+        "feesUSD": "0",
+        "__typename": "PoolDayData"
+      }
+    ]
+  }
+}</code></pre></div><hr class="my-12"/><div class="font-sans"><div class="mb-12"><a target="_blank" href="https://github.com/xiaotiandada/blog/issues/92" class="font-medium border border-gray-700 hover:bg-gray-700 hover:text-gray-100 transition-all text-gray-700 text-sm rounded px-4 py-2">Add comment</a></div></div><div class="my-12"><div class="text-sm">Powered by <a class="underline" target="_blank" href="https://github.com/djyde/sairin">Sairin</a></div></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"id":"I_kwDOD_pKSM5GDuZQ","url":"https://github.com/xiaotiandada/blog/issues/92","title":"Uniswap Info 学习","updatedAt":"2022-03-21T14:33:19Z","createdAt":"2022-03-21T13:22:12Z","body":"- https://info.uniswap.org\r\n- https://github.com/Uniswap/v3-info\r\n- https://github.com/xiaotiandada/vv-info\r\n\r\n\r\n- uniswap/uniswap-v3/graphql - https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3/graphql\r\n- blocklytics/ethereum-blocks - https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks\r\n\r\n\r\n\r\n### 查询 Tokens\r\n\r\n/uniswap/uniswap-v3/graphql\r\n\r\n```\r\n{\r\n  tokens {\r\n    id,\r\n    symbol,\r\n    name\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"tokens\": [\r\n      {\r\n        \"id\": \"0x00000000000045166c45af0fc6e4cf31d9e14b9a\",\r\n        \"symbol\": \"BID\",\r\n        \"name\": \"TopBidder\"\r\n      },\r\n\t\t\t// ...\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 topPools\r\n\r\n```\r\nquery topPools {\r\n  tokens(\r\n    first: 50\r\n    orderBy: totalValueLockedUSD\r\n    orderDirection: desc\r\n    subgraphError: allow\r\n  ) {\r\n    id\r\n    name\r\n    symbol\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"tokens\": [\r\n      {\r\n        \"id\": \"0x12b32f10a499bf40db334efe04226cca00bf2d9b\",\r\n        \"name\": \"UMIIE COIN\",\r\n        \"symbol\": \"UMIIE\",\r\n        \"__typename\": \"Token\"\r\n      },\r\n      {\r\n        \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\r\n        \"name\": \"Wrapped Ether\",\r\n        \"symbol\": \"WETH\",\r\n        \"__typename\": \"Token\"\r\n      },\r\n      // ...\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 Tokens\r\n\r\n```\r\nquery tokens {\r\n  tokens(\r\n    where: {id_in: [\"0x12b32f10a499bf40db334efe04226cca00bf2d9b\", \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\", \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\"]}\r\n    block: {number: 14423607}\r\n    orderBy: totalValueLockedUSD\r\n    orderDirection: desc\r\n    subgraphError: allow\r\n  ) {\r\n    id\r\n    symbol\r\n    name\r\n    derivedETH\r\n    volumeUSD\r\n    volume\r\n    txCount\r\n    totalValueLocked\r\n    feesUSD\r\n    totalValueLockedUSD\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"tokens\": [\r\n      {\r\n        \"id\": \"0x12b32f10a499bf40db334efe04226cca00bf2d9b\",\r\n        \"symbol\": \"UMIIE\",\r\n        \"name\": \"UMIIE COIN\",\r\n        \"derivedETH\": \"0.1003902793538328620619869326124331\",\r\n        \"volumeUSD\": \"1511.56963205356389982056338569223\",\r\n        \"volume\": \"1000108.86838829453580011\",\r\n        \"txCount\": \"56\",\r\n        \"totalValueLocked\": \"4060050843.47631394922014061\",\r\n        \"feesUSD\": \"4.103789417232335009489830669286369\",\r\n        \"totalValueLockedUSD\": \"1197081242711.1943889376370393552\",\r\n        \"__typename\": \"Token\"\r\n      },\r\n      {\r\n        \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\r\n        \"symbol\": \"WETH\",\r\n        \"name\": \"Wrapped Ether\",\r\n        \"derivedETH\": \"1\",\r\n        \"volumeUSD\": \"394329036941.5623654027733304210331\",\r\n        \"volume\": \"125103787.712591104192372425\",\r\n        \"txCount\": \"10826685\",\r\n        \"totalValueLocked\": \"441402.825574432888969787\",\r\n        \"feesUSD\": \"766412514.4017064014764513833224189\",\r\n        \"totalValueLockedUSD\": \"1271992049.856639541792290053439463\",\r\n        \"__typename\": \"Token\"\r\n      },\r\n      {\r\n        \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\r\n        \"symbol\": \"USDC\",\r\n        \"name\": \"USD Coin\",\r\n        \"derivedETH\": \"0.00034701696887506600425180887192684\",\r\n        \"volumeUSD\": \"277035127783.0198627557171409059903\",\r\n        \"volume\": \"277026881311.261403\",\r\n        \"txCount\": \"3156306\",\r\n        \"totalValueLocked\": \"1006710296.623717\",\r\n        \"feesUSD\": \"305659059.6247657073983772200408159\",\r\n        \"totalValueLockedUSD\": \"1006710296.623717\",\r\n        \"__typename\": \"Token\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 blocks\r\n\r\n```\r\nquery blocks {\r\n  t1647783480: blocks(\r\n    first: 1\r\n    orderBy: timestamp\r\n    orderDirection: desc\r\n    where: {timestamp_gt: 1647783480, timestamp_lt: 1647784080}\r\n  ) {\r\n    number\r\n    __typename\r\n  }\r\n  t1647697080: blocks(\r\n    first: 1\r\n    orderBy: timestamp\r\n    orderDirection: desc\r\n    where: {timestamp_gt: 1647697080, timestamp_lt: 1647697680}\r\n  ) {\r\n    number\r\n    __typename\r\n  }\r\n  t1647265080: blocks(\r\n    first: 1\r\n    orderBy: timestamp\r\n    orderDirection: desc\r\n    where: {timestamp_gt: 1647265080, timestamp_lt: 1647265680}\r\n  ) {\r\n    number\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"t1647783480\": [\r\n      {\r\n        \"number\": \"14423607\",\r\n        \"__typename\": \"Block\"\r\n      }\r\n    ],\r\n    \"t1647697080\": [\r\n      {\r\n        \"number\": \"14417197\",\r\n        \"__typename\": \"Block\"\r\n      }\r\n    ],\r\n    \"t1647265080\": [\r\n      {\r\n        \"number\": \"14385081\",\r\n        \"__typename\": \"Block\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 pools\r\n\r\n```\r\nquery pools {\r\n  pools(\r\n    where: {id_in: [\"0xa850478adaace4c08fc61de44d8cf3b64f359bec\", \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\"]}\r\n    orderBy: totalValueLockedUSD\r\n    orderDirection: desc\r\n    subgraphError: allow\r\n  ) {\r\n    id\r\n    feeTier\r\n    liquidity\r\n    sqrtPrice\r\n    tick\r\n    token0 {\r\n      id\r\n      symbol\r\n      name\r\n      decimals\r\n      derivedETH\r\n      __typename\r\n    }\r\n    token1 {\r\n      id\r\n      symbol\r\n      name\r\n      decimals\r\n      derivedETH\r\n      __typename\r\n    }\r\n    token0Price\r\n    token1Price\r\n    volumeUSD\r\n    txCount\r\n    totalValueLockedToken0\r\n    totalValueLockedToken1\r\n    totalValueLockedUSD\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"pools\": [\r\n      {\r\n        \"id\": \"0xa850478adaace4c08fc61de44d8cf3b64f359bec\",\r\n        \"feeTier\": \"500\",\r\n        \"liquidity\": \"1706245281880037395956227425\",\r\n        \"sqrtPrice\": \"792049440195001924670217089101\",\r\n        \"tick\": \"46048\",\r\n        \"token0\": {\r\n          \"id\": \"0x12b32f10a499bf40db334efe04226cca00bf2d9b\",\r\n          \"symbol\": \"UMIIE\",\r\n          \"name\": \"UMIIE COIN\",\r\n          \"decimals\": \"18\",\r\n          \"derivedETH\": \"0.1003902793538328620619869326124331\",\r\n          \"__typename\": \"Token\"\r\n        },\r\n        \"token1\": {\r\n          \"id\": \"0x5ed60a121159481675bad3e648ba4c89753e056f\",\r\n          \"symbol\": \"UMIIE2\",\r\n          \"name\": \"Umiie 2\",\r\n          \"decimals\": \"18\",\r\n          \"derivedETH\": \"0\",\r\n          \"__typename\": \"Token\"\r\n        },\r\n        \"token0Price\": \"0.01000586374960270227477201921193648\",\r\n        \"token1Price\": \"99.94139686738253752770898237370869\",\r\n        \"volumeUSD\": \"0\",\r\n        \"txCount\": \"9\",\r\n        \"totalValueLockedToken0\": \"50050480.103497613002904654\",\r\n        \"totalValueLockedToken1\": \"14644676667.240849617715772909\",\r\n        \"totalValueLockedUSD\": \"12887625156.60443191907094774602519\",\r\n        \"__typename\": \"Pool\"\r\n      },\r\n      {\r\n        \"id\": \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\",\r\n        \"feeTier\": \"3000\",\r\n        \"liquidity\": \"13757788412751061547\",\r\n        \"sqrtPrice\": \"1465022049799761266689268933073649\",\r\n        \"tick\": \"196510\",\r\n        \"token0\": {\r\n          \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\r\n          \"symbol\": \"USDC\",\r\n          \"name\": \"USD Coin\",\r\n          \"decimals\": \"6\",\r\n          \"derivedETH\": \"0.0003419236610902688830990355549810135\",\r\n          \"__typename\": \"Token\"\r\n        },\r\n        \"token1\": {\r\n          \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\r\n          \"symbol\": \"WETH\",\r\n          \"name\": \"Wrapped Ether\",\r\n          \"decimals\": \"18\",\r\n          \"derivedETH\": \"1\",\r\n          \"__typename\": \"Token\"\r\n        },\r\n        \"token0Price\": \"2924.629424039762397178342690644415\",\r\n        \"token1Price\": \"0.0003419236610902688830990355549810135\",\r\n        \"volumeUSD\": \"46675235734.17557247596178718271208\",\r\n        \"txCount\": \"300573\",\r\n        \"totalValueLockedToken0\": \"184459973.048114\",\r\n        \"totalValueLockedToken1\": \"76505.849041123104288281\",\r\n        \"totalValueLockedUSD\": \"408211230.2649268727637666561467565\",\r\n        \"__typename\": \"Pool\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 prices\r\n\r\n```\r\nquery prices {\r\n  current: bundles(first: 1, subgraphError: allow) {\r\n    ethPriceUSD\r\n    __typename\r\n  }\r\n  oneDay: bundles(first: 1, block: {number: 14423607}, subgraphError: allow) {\r\n    ethPriceUSD\r\n    __typename\r\n  }\r\n  twoDay: bundles(first: 1, block: {number: 14417197}, subgraphError: allow) {\r\n    ethPriceUSD\r\n    __typename\r\n  }\r\n  oneWeek: bundles(first: 1, block: {number: 14385081}, subgraphError: allow) {\r\n    ethPriceUSD\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"current\": [\r\n      {\r\n        \"ethPriceUSD\": \"2911.900514205906596528906408766284\",\r\n        \"__typename\": \"Bundle\"\r\n      }\r\n    ],\r\n    \"oneDay\": [\r\n      {\r\n        \"ethPriceUSD\": \"2881.703460328542976410568122182245\",\r\n        \"__typename\": \"Bundle\"\r\n      }\r\n    ],\r\n    \"twoDay\": [\r\n      {\r\n        \"ethPriceUSD\": \"2957.208390287011377358451424105611\",\r\n        \"__typename\": \"Bundle\"\r\n      }\r\n    ],\r\n    \"oneWeek\": [\r\n      {\r\n        \"ethPriceUSD\": \"2566.212421242889978064374895815068\",\r\n        \"__typename\": \"Bundle\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 transactions\r\n\r\n```\r\nquery transactions {\r\n  transactions(\r\n    first: 500\r\n    orderBy: timestamp\r\n    orderDirection: desc\r\n    subgraphError: allow\r\n  ) {\r\n    id\r\n    timestamp\r\n    mints {\r\n      pool {\r\n        token0 {\r\n          id\r\n          symbol\r\n          __typename\r\n        }\r\n        token1 {\r\n          id\r\n          symbol\r\n          __typename\r\n        }\r\n        __typename\r\n      }\r\n      owner\r\n      sender\r\n      origin\r\n      amount0\r\n      amount1\r\n      amountUSD\r\n      __typename\r\n    }\r\n    swaps {\r\n      pool {\r\n        token0 {\r\n          id\r\n          symbol\r\n          __typename\r\n        }\r\n        token1 {\r\n          id\r\n          symbol\r\n          __typename\r\n        }\r\n        __typename\r\n      }\r\n      origin\r\n      amount0\r\n      amount1\r\n      amountUSD\r\n      __typename\r\n    }\r\n    burns {\r\n      pool {\r\n        token0 {\r\n          id\r\n          symbol\r\n          __typename\r\n        }\r\n        token1 {\r\n          id\r\n          symbol\r\n          __typename\r\n        }\r\n        __typename\r\n      }\r\n      owner\r\n      origin\r\n      amount0\r\n      amount1\r\n      amountUSD\r\n      __typename\r\n    }\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"transactions\": [\r\n      {\r\n        \"id\": \"0xd87658f56454d4bccf363af8ed720e19990d3c7a02939320ae59258fbef2aa0a\",\r\n        \"timestamp\": \"1647872333\",\r\n        \"mints\": [],\r\n        \"swaps\": [\r\n          {\r\n            \"pool\": {\r\n              \"token0\": {\r\n                \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\r\n                \"symbol\": \"USDC\",\r\n                \"__typename\": \"Token\"\r\n              },\r\n              \"token1\": {\r\n                \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\r\n                \"symbol\": \"WETH\",\r\n                \"__typename\": \"Token\"\r\n              },\r\n              \"__typename\": \"Pool\"\r\n            },\r\n            \"origin\": \"0x6e5dac0408d313c3adb78c671741df7a1944f9d5\",\r\n            \"amount0\": \"838.639246\",\r\n            \"amount1\": \"-0.288308585496447514\",\r\n            \"amountUSD\": \"839.082582178541550390129466135908\",\r\n            \"__typename\": \"Swap\"\r\n          },\r\n          {\r\n            \"pool\": {\r\n              \"token0\": {\r\n                \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\r\n                \"symbol\": \"USDC\",\r\n                \"__typename\": \"Token\"\r\n              },\r\n              \"token1\": {\r\n                \"id\": \"0xd5d86fc8d5c0ea1ac1ac5dfab6e529c9967a45e9\",\r\n                \"symbol\": \"WRLD\",\r\n                \"__typename\": \"Token\"\r\n              },\r\n              \"__typename\": \"Pool\"\r\n            },\r\n            \"origin\": \"0x6e5dac0408d313c3adb78c671741df7a1944f9d5\",\r\n            \"amount0\": \"-838.639246\",\r\n            \"amount1\": \"3500\",\r\n            \"amountUSD\": \"838.639246\",\r\n            \"__typename\": \"Swap\"\r\n          }\r\n        ],\r\n        \"burns\": [],\r\n        \"__typename\": \"Transaction\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### 查询 uniswapDayDatas\r\n\r\n```\r\nquery uniswapDayDatas {\r\n  uniswapDayDatas(\r\n    first: 1000\r\n    skip: 0\r\n    subgraphError: allow\r\n    where: {date_gt: 1619170975}\r\n    orderBy: date\r\n    orderDirection: asc\r\n  ) {\r\n    id\r\n    date\r\n    volumeUSD\r\n    tvlUSD\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"uniswapDayDatas\": [\r\n      {\r\n        \"id\": \"18751\",\r\n        \"date\": 1620086400,\r\n        \"volumeUSD\": \"0\",\r\n        \"tvlUSD\": \"0\",\r\n        \"__typename\": \"UniswapDayData\"\r\n      },\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n### poolDayDatas\r\n\r\n```\r\nquery poolDayDatas {\r\n  poolDayDatas(\r\n    first: 1000\r\n    skip: 0\r\n    where: {pool: \"0xa850478adaace4c08fc61de44d8cf3b64f359bec\", date_gt: 1619170975}\r\n    orderBy: date\r\n    orderDirection: asc\r\n    subgraphError: allow\r\n  ) {\r\n    date\r\n    volumeUSD\r\n    tvlUSD\r\n    feesUSD\r\n    __typename\r\n  }\r\n}\r\n```\r\n\r\n```json\r\n{\r\n  \"data\": {\r\n    \"poolDayDatas\": [\r\n      {\r\n        \"date\": 1625356800,\r\n        \"volumeUSD\": \"0\",\r\n        \"tvlUSD\": \"0\",\r\n        \"feesUSD\": \"0\",\r\n        \"__typename\": \"PoolDayData\"\r\n      },\r\n      {\r\n        \"date\": 1634342400,\r\n        \"volumeUSD\": \"0\",\r\n        \"tvlUSD\": \"0\",\r\n        \"feesUSD\": \"0\",\r\n        \"__typename\": \"PoolDayData\"\r\n      },\r\n      {\r\n        \"date\": 1646611200,\r\n        \"volumeUSD\": \"0\",\r\n        \"tvlUSD\": \"261269729093.816542194433000739702\",\r\n        \"feesUSD\": \"0\",\r\n        \"__typename\": \"PoolDayData\"\r\n      },\r\n      {\r\n        \"date\": 1646697600,\r\n        \"volumeUSD\": \"0\",\r\n        \"tvlUSD\": \"12887625156.60443191907094774602519\",\r\n        \"feesUSD\": \"0\",\r\n        \"__typename\": \"PoolDayData\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n```\r\n\r\n","comments":{"nodes":[]},"reactionGroups":[{"content":"THUMBS_UP","reactors":{"totalCount":0}},{"content":"THUMBS_DOWN","reactors":{"totalCount":0}},{"content":"LAUGH","reactors":{"totalCount":0}},{"content":"HOORAY","reactors":{"totalCount":0}},{"content":"CONFUSED","reactors":{"totalCount":0}},{"content":"HEART","reactors":{"totalCount":0}},{"content":"ROCKET","reactors":{"totalCount":0}},{"content":"EYES","reactors":{"totalCount":0}}],"author":{"login":"xiaotiandada","url":"https://github.com/xiaotiandada","avatarUrl":"https://avatars.githubusercontent.com/u/24250627?u=51a93e07957381123eb9fbdd6407de36033b578d\u0026v=4"},"html":"\u003cul\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://info.uniswap.org\"\u003ehttps://info.uniswap.org\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://github.com/Uniswap/v3-info\"\u003ehttps://github.com/Uniswap/v3-info\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003cp\u003e\u003ca href=\"https://github.com/xiaotiandada/vv-info\"\u003ehttps://github.com/xiaotiandada/vv-info\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003cp\u003euniswap/uniswap-v3/graphql - \u003ca href=\"https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3/graphql\"\u003ehttps://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3/graphql\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003cp\u003eblocklytics/ethereum-blocks - \u003ca href=\"https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks\"\u003ehttps://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"查询-tokens\"\u003e查询 Tokens\u003c/h3\u003e\n\u003cp\u003e/uniswap/uniswap-v3/graphql\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\n  tokens {\n    id,\n    symbol,\n    name\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"tokens\": [\n      {\n        \"id\": \"0x00000000000045166c45af0fc6e4cf31d9e14b9a\",\n        \"symbol\": \"BID\",\n        \"name\": \"TopBidder\"\n      },\n            // ...\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-toppools\"\u003e查询 topPools\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery topPools {\n  tokens(\n    first: 50\n    orderBy: totalValueLockedUSD\n    orderDirection: desc\n    subgraphError: allow\n  ) {\n    id\n    name\n    symbol\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"tokens\": [\n      {\n        \"id\": \"0x12b32f10a499bf40db334efe04226cca00bf2d9b\",\n        \"name\": \"UMIIE COIN\",\n        \"symbol\": \"UMIIE\",\n        \"__typename\": \"Token\"\n      },\n      {\n        \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\n        \"name\": \"Wrapped Ether\",\n        \"symbol\": \"WETH\",\n        \"__typename\": \"Token\"\n      },\n      // ...\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-tokens-1\"\u003e查询 Tokens\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery tokens {\n  tokens(\n    where: {id_in: [\"0x12b32f10a499bf40db334efe04226cca00bf2d9b\", \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\", \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\"]}\n    block: {number: 14423607}\n    orderBy: totalValueLockedUSD\n    orderDirection: desc\n    subgraphError: allow\n  ) {\n    id\n    symbol\n    name\n    derivedETH\n    volumeUSD\n    volume\n    txCount\n    totalValueLocked\n    feesUSD\n    totalValueLockedUSD\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"tokens\": [\n      {\n        \"id\": \"0x12b32f10a499bf40db334efe04226cca00bf2d9b\",\n        \"symbol\": \"UMIIE\",\n        \"name\": \"UMIIE COIN\",\n        \"derivedETH\": \"0.1003902793538328620619869326124331\",\n        \"volumeUSD\": \"1511.56963205356389982056338569223\",\n        \"volume\": \"1000108.86838829453580011\",\n        \"txCount\": \"56\",\n        \"totalValueLocked\": \"4060050843.47631394922014061\",\n        \"feesUSD\": \"4.103789417232335009489830669286369\",\n        \"totalValueLockedUSD\": \"1197081242711.1943889376370393552\",\n        \"__typename\": \"Token\"\n      },\n      {\n        \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\n        \"symbol\": \"WETH\",\n        \"name\": \"Wrapped Ether\",\n        \"derivedETH\": \"1\",\n        \"volumeUSD\": \"394329036941.5623654027733304210331\",\n        \"volume\": \"125103787.712591104192372425\",\n        \"txCount\": \"10826685\",\n        \"totalValueLocked\": \"441402.825574432888969787\",\n        \"feesUSD\": \"766412514.4017064014764513833224189\",\n        \"totalValueLockedUSD\": \"1271992049.856639541792290053439463\",\n        \"__typename\": \"Token\"\n      },\n      {\n        \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\n        \"symbol\": \"USDC\",\n        \"name\": \"USD Coin\",\n        \"derivedETH\": \"0.00034701696887506600425180887192684\",\n        \"volumeUSD\": \"277035127783.0198627557171409059903\",\n        \"volume\": \"277026881311.261403\",\n        \"txCount\": \"3156306\",\n        \"totalValueLocked\": \"1006710296.623717\",\n        \"feesUSD\": \"305659059.6247657073983772200408159\",\n        \"totalValueLockedUSD\": \"1006710296.623717\",\n        \"__typename\": \"Token\"\n      }\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-blocks\"\u003e查询 blocks\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery blocks {\n  t1647783480: blocks(\n    first: 1\n    orderBy: timestamp\n    orderDirection: desc\n    where: {timestamp_gt: 1647783480, timestamp_lt: 1647784080}\n  ) {\n    number\n    __typename\n  }\n  t1647697080: blocks(\n    first: 1\n    orderBy: timestamp\n    orderDirection: desc\n    where: {timestamp_gt: 1647697080, timestamp_lt: 1647697680}\n  ) {\n    number\n    __typename\n  }\n  t1647265080: blocks(\n    first: 1\n    orderBy: timestamp\n    orderDirection: desc\n    where: {timestamp_gt: 1647265080, timestamp_lt: 1647265680}\n  ) {\n    number\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"t1647783480\": [\n      {\n        \"number\": \"14423607\",\n        \"__typename\": \"Block\"\n      }\n    ],\n    \"t1647697080\": [\n      {\n        \"number\": \"14417197\",\n        \"__typename\": \"Block\"\n      }\n    ],\n    \"t1647265080\": [\n      {\n        \"number\": \"14385081\",\n        \"__typename\": \"Block\"\n      }\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-pools\"\u003e查询 pools\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery pools {\n  pools(\n    where: {id_in: [\"0xa850478adaace4c08fc61de44d8cf3b64f359bec\", \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\"]}\n    orderBy: totalValueLockedUSD\n    orderDirection: desc\n    subgraphError: allow\n  ) {\n    id\n    feeTier\n    liquidity\n    sqrtPrice\n    tick\n    token0 {\n      id\n      symbol\n      name\n      decimals\n      derivedETH\n      __typename\n    }\n    token1 {\n      id\n      symbol\n      name\n      decimals\n      derivedETH\n      __typename\n    }\n    token0Price\n    token1Price\n    volumeUSD\n    txCount\n    totalValueLockedToken0\n    totalValueLockedToken1\n    totalValueLockedUSD\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"pools\": [\n      {\n        \"id\": \"0xa850478adaace4c08fc61de44d8cf3b64f359bec\",\n        \"feeTier\": \"500\",\n        \"liquidity\": \"1706245281880037395956227425\",\n        \"sqrtPrice\": \"792049440195001924670217089101\",\n        \"tick\": \"46048\",\n        \"token0\": {\n          \"id\": \"0x12b32f10a499bf40db334efe04226cca00bf2d9b\",\n          \"symbol\": \"UMIIE\",\n          \"name\": \"UMIIE COIN\",\n          \"decimals\": \"18\",\n          \"derivedETH\": \"0.1003902793538328620619869326124331\",\n          \"__typename\": \"Token\"\n        },\n        \"token1\": {\n          \"id\": \"0x5ed60a121159481675bad3e648ba4c89753e056f\",\n          \"symbol\": \"UMIIE2\",\n          \"name\": \"Umiie 2\",\n          \"decimals\": \"18\",\n          \"derivedETH\": \"0\",\n          \"__typename\": \"Token\"\n        },\n        \"token0Price\": \"0.01000586374960270227477201921193648\",\n        \"token1Price\": \"99.94139686738253752770898237370869\",\n        \"volumeUSD\": \"0\",\n        \"txCount\": \"9\",\n        \"totalValueLockedToken0\": \"50050480.103497613002904654\",\n        \"totalValueLockedToken1\": \"14644676667.240849617715772909\",\n        \"totalValueLockedUSD\": \"12887625156.60443191907094774602519\",\n        \"__typename\": \"Pool\"\n      },\n      {\n        \"id\": \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\",\n        \"feeTier\": \"3000\",\n        \"liquidity\": \"13757788412751061547\",\n        \"sqrtPrice\": \"1465022049799761266689268933073649\",\n        \"tick\": \"196510\",\n        \"token0\": {\n          \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\n          \"symbol\": \"USDC\",\n          \"name\": \"USD Coin\",\n          \"decimals\": \"6\",\n          \"derivedETH\": \"0.0003419236610902688830990355549810135\",\n          \"__typename\": \"Token\"\n        },\n        \"token1\": {\n          \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\n          \"symbol\": \"WETH\",\n          \"name\": \"Wrapped Ether\",\n          \"decimals\": \"18\",\n          \"derivedETH\": \"1\",\n          \"__typename\": \"Token\"\n        },\n        \"token0Price\": \"2924.629424039762397178342690644415\",\n        \"token1Price\": \"0.0003419236610902688830990355549810135\",\n        \"volumeUSD\": \"46675235734.17557247596178718271208\",\n        \"txCount\": \"300573\",\n        \"totalValueLockedToken0\": \"184459973.048114\",\n        \"totalValueLockedToken1\": \"76505.849041123104288281\",\n        \"totalValueLockedUSD\": \"408211230.2649268727637666561467565\",\n        \"__typename\": \"Pool\"\n      }\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-prices\"\u003e查询 prices\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery prices {\n  current: bundles(first: 1, subgraphError: allow) {\n    ethPriceUSD\n    __typename\n  }\n  oneDay: bundles(first: 1, block: {number: 14423607}, subgraphError: allow) {\n    ethPriceUSD\n    __typename\n  }\n  twoDay: bundles(first: 1, block: {number: 14417197}, subgraphError: allow) {\n    ethPriceUSD\n    __typename\n  }\n  oneWeek: bundles(first: 1, block: {number: 14385081}, subgraphError: allow) {\n    ethPriceUSD\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"current\": [\n      {\n        \"ethPriceUSD\": \"2911.900514205906596528906408766284\",\n        \"__typename\": \"Bundle\"\n      }\n    ],\n    \"oneDay\": [\n      {\n        \"ethPriceUSD\": \"2881.703460328542976410568122182245\",\n        \"__typename\": \"Bundle\"\n      }\n    ],\n    \"twoDay\": [\n      {\n        \"ethPriceUSD\": \"2957.208390287011377358451424105611\",\n        \"__typename\": \"Bundle\"\n      }\n    ],\n    \"oneWeek\": [\n      {\n        \"ethPriceUSD\": \"2566.212421242889978064374895815068\",\n        \"__typename\": \"Bundle\"\n      }\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-transactions\"\u003e查询 transactions\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery transactions {\n  transactions(\n    first: 500\n    orderBy: timestamp\n    orderDirection: desc\n    subgraphError: allow\n  ) {\n    id\n    timestamp\n    mints {\n      pool {\n        token0 {\n          id\n          symbol\n          __typename\n        }\n        token1 {\n          id\n          symbol\n          __typename\n        }\n        __typename\n      }\n      owner\n      sender\n      origin\n      amount0\n      amount1\n      amountUSD\n      __typename\n    }\n    swaps {\n      pool {\n        token0 {\n          id\n          symbol\n          __typename\n        }\n        token1 {\n          id\n          symbol\n          __typename\n        }\n        __typename\n      }\n      origin\n      amount0\n      amount1\n      amountUSD\n      __typename\n    }\n    burns {\n      pool {\n        token0 {\n          id\n          symbol\n          __typename\n        }\n        token1 {\n          id\n          symbol\n          __typename\n        }\n        __typename\n      }\n      owner\n      origin\n      amount0\n      amount1\n      amountUSD\n      __typename\n    }\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"transactions\": [\n      {\n        \"id\": \"0xd87658f56454d4bccf363af8ed720e19990d3c7a02939320ae59258fbef2aa0a\",\n        \"timestamp\": \"1647872333\",\n        \"mints\": [],\n        \"swaps\": [\n          {\n            \"pool\": {\n              \"token0\": {\n                \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\n                \"symbol\": \"USDC\",\n                \"__typename\": \"Token\"\n              },\n              \"token1\": {\n                \"id\": \"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\",\n                \"symbol\": \"WETH\",\n                \"__typename\": \"Token\"\n              },\n              \"__typename\": \"Pool\"\n            },\n            \"origin\": \"0x6e5dac0408d313c3adb78c671741df7a1944f9d5\",\n            \"amount0\": \"838.639246\",\n            \"amount1\": \"-0.288308585496447514\",\n            \"amountUSD\": \"839.082582178541550390129466135908\",\n            \"__typename\": \"Swap\"\n          },\n          {\n            \"pool\": {\n              \"token0\": {\n                \"id\": \"0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48\",\n                \"symbol\": \"USDC\",\n                \"__typename\": \"Token\"\n              },\n              \"token1\": {\n                \"id\": \"0xd5d86fc8d5c0ea1ac1ac5dfab6e529c9967a45e9\",\n                \"symbol\": \"WRLD\",\n                \"__typename\": \"Token\"\n              },\n              \"__typename\": \"Pool\"\n            },\n            \"origin\": \"0x6e5dac0408d313c3adb78c671741df7a1944f9d5\",\n            \"amount0\": \"-838.639246\",\n            \"amount1\": \"3500\",\n            \"amountUSD\": \"838.639246\",\n            \"__typename\": \"Swap\"\n          }\n        ],\n        \"burns\": [],\n        \"__typename\": \"Transaction\"\n      }\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"查询-uniswapdaydatas\"\u003e查询 uniswapDayDatas\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery uniswapDayDatas {\n  uniswapDayDatas(\n    first: 1000\n    skip: 0\n    subgraphError: allow\n    where: {date_gt: 1619170975}\n    orderBy: date\n    orderDirection: asc\n  ) {\n    id\n    date\n    volumeUSD\n    tvlUSD\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"uniswapDayDatas\": [\n      {\n        \"id\": \"18751\",\n        \"date\": 1620086400,\n        \"volumeUSD\": \"0\",\n        \"tvlUSD\": \"0\",\n        \"__typename\": \"UniswapDayData\"\n      },\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003ch3 id=\"pooldaydatas\"\u003epoolDayDatas\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003equery poolDayDatas {\n  poolDayDatas(\n    first: 1000\n    skip: 0\n    where: {pool: \"0xa850478adaace4c08fc61de44d8cf3b64f359bec\", date_gt: 1619170975}\n    orderBy: date\n    orderDirection: asc\n    subgraphError: allow\n  ) {\n    date\n    volumeUSD\n    tvlUSD\n    feesUSD\n    __typename\n  }\n}\u003c/code\u003e\u003c/pre\u003e\u003cpre class=\"language-json\"\u003e\u003ccode class=\"language-json\"\u003e{\n  \"data\": {\n    \"poolDayDatas\": [\n      {\n        \"date\": 1625356800,\n        \"volumeUSD\": \"0\",\n        \"tvlUSD\": \"0\",\n        \"feesUSD\": \"0\",\n        \"__typename\": \"PoolDayData\"\n      },\n      {\n        \"date\": 1634342400,\n        \"volumeUSD\": \"0\",\n        \"tvlUSD\": \"0\",\n        \"feesUSD\": \"0\",\n        \"__typename\": \"PoolDayData\"\n      },\n      {\n        \"date\": 1646611200,\n        \"volumeUSD\": \"0\",\n        \"tvlUSD\": \"261269729093.816542194433000739702\",\n        \"feesUSD\": \"0\",\n        \"__typename\": \"PoolDayData\"\n      },\n      {\n        \"date\": 1646697600,\n        \"volumeUSD\": \"0\",\n        \"tvlUSD\": \"12887625156.60443191907094774602519\",\n        \"feesUSD\": \"0\",\n        \"__typename\": \"PoolDayData\"\n      }\n    ]\n  }\n}\u003c/code\u003e\u003c/pre\u003e","attributes":{}},"themeConfig":{"title":"Blog(issues)","links":[{"title":"GitHub","url":"https://github.com/xiaotiandada/blog"},{"title":"Twitter","url":"https://twitter.com/XiaoTianIsMe"}]}},"__N_SSG":true},"page":"/[...path]","query":{"path":["I_kwDOD_pKSM5GDuZQ"]},"buildId":"YPEk3V-eoVeml18YoUSCM","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
