@@ -83,3 +83,48 @@ export const GetPostsQuery = (variables: GetPostQueryVar) => ({
     `,
   variables,
 });
+
+export const GetPostsQueryLast = (variables: GetPostQueryVar) => ({
+  query: `
+      query GetPosts($owner: String!, $repo: String!) { 
+  repository(owner: $owner, name: $repo) {
+    issues(last: 100, orderBy: {
+      field: CREATED_AT, direction: DESC
+    }) {
+      nodes {
+        id,
+        url,
+        title,
+        updatedAt,
+        createdAt,
+        body,
+        comments (first: 100) {
+          nodes {
+            createdAt,
+            url,
+            author {
+              login,
+              url,
+              avatarUrl,
+            },
+            body
+          }
+        },
+        reactionGroups {
+          content,
+          reactors {
+            totalCount,
+          }
+        },
+        author {
+          login,
+          url,
+          avatarUrl
+        }
+      }
+    }
+  }
+}
+    `,
+  variables,
+});

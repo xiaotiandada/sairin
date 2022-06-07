@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { marked } from 'marked';
 import fm from 'front-matter';
-import { omit, pick } from 'lodash';
+import { omit, pick, uniqBy } from 'lodash';
 import { Feed } from 'feed';
 
 import * as prism from 'prismjs';
-import { GetPostQueryProps, GetPostsQuery } from './queries';
+import { GetPostQueryProps, GetPostsQueryLast, GetPostsQuery } from './queries';
 
 export type FrontMatter = {
   path: string;
@@ -69,8 +69,31 @@ export class Sairin {
         repo: this.resolvedConfig.repoSlug,
       })
     );
+    const resultLast = await this.request<GetPostQueryProps>(
+      GetPostsQueryLast({
+        owner: this.resolvedConfig.ghUserName,
+        repo: this.resolvedConfig.repoSlug,
+      })
+    );
 
-    const posts = result.repository.issues.nodes
+    // console.log('result', result, resultLast);
+
+    // 还不知道怎么分页 暂时写两份
+    if (
+      result?.repository?.issues?.nodes &&
+      resultLast?.repository?.issues?.nodes
+    ) {
+      const list = [
+        ...result.repository.issues.nodes,
+        ...resultLast.repository.issues.nodes,
+      ];
+      const listFiltered = uniqBy(list, 'id');
+      console.log('listFiltered', listFiltered.length);
+
+      result.repository.issues.nodes = listFiltered;
+    }
+
+    const posts = result?.repository?.issues.nodes
       .filter((post) => {
         return this.allowUsers.indexOf(post.author.login) !== -1;
       })
@@ -91,7 +114,7 @@ export class Sairin {
         };
       });
 
-    return posts;
+    return posts || [];
   };
 
   private processBody(body: string) {
