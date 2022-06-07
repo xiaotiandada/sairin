@@ -38,7 +38,7 @@ export default function Home(props: HomePageThemeProps) {
           {props.posts.map((post) => {
             return (
               <div key={post.id} className="text-xl my-8">
-                <Link href={`/${post.id}`}>
+                <Link href={`/${post.attributes.path || post.id}`}>
                   <a className="hover:underline">{post.title}</a>
                 </Link>
 

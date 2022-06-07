@@ -159,7 +159,9 @@ export class Sairin {
     const posts = await this.getPostList();
     const post =
       posts.find(
-        (p) => p.id === ctx.params[this.PAGE_PATH_PLACEHOLDER].join('/')
+        (p) =>
+          (p.attributes.path || p.id) ===
+          ctx.params[this.PAGE_PATH_PLACEHOLDER].join('/')
       ) || null;
     return {
       props: {
@@ -190,7 +192,7 @@ export class Sairin {
       feed.addItem({
         date: new Date(post.updatedAt),
         link: `${this.config.siteConfig.url}/${
-          post.attributes.path || post.id
+          post.attributes.path || post.id || ''
         }`,
         title: post.title,
         content: post.html,
