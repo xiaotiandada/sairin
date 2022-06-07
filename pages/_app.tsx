@@ -1,14 +1,14 @@
-import { Sairin } from '@sairinjs/core'
+import { Sairin } from '../@sairinjs/core/src';
 
-import sairinConfig from '../sairin.config'
+import sairinConfig from '../sairin.config';
 
 // import theme style
-import "@sairinjs/sairin-theme-minimal/style.css";
+import '../@sairinjs/sairin-theme-minimal/style.css';
 
-export const sairin = new Sairin(sairinConfig)
+export const sairin = new Sairin(sairinConfig);
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;
