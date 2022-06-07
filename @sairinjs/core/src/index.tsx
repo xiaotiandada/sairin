@@ -78,6 +78,8 @@ export class Sairin {
 
     // console.log('result', result, resultLast);
 
+    let postList = [];
+
     // 还不知道怎么分页 暂时写两份
     if (
       result?.repository?.issues?.nodes &&
@@ -87,13 +89,11 @@ export class Sairin {
         ...result.repository.issues.nodes,
         ...resultLast.repository.issues.nodes,
       ];
-      const listFiltered = uniqBy(list, 'id');
+      postList = uniqBy(list, 'id');
       // console.log('listFiltered', listFiltered.length);
-
-      result.repository.issues.nodes = listFiltered;
     }
 
-    const posts = result?.repository?.issues.nodes
+    const posts = postList
       .filter((post) => {
         return this.allowUsers.indexOf(post.author.login) !== -1;
       })
