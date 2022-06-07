@@ -159,9 +159,7 @@ export class Sairin {
     const posts = await this.getPostList();
     const post =
       posts.find(
-        (p) =>
-          (p.attributes.path || p.id) ===
-          ctx.params[this.PAGE_PATH_PLACEHOLDER].join('/')
+        (p) => p.id === ctx.params[this.PAGE_PATH_PLACEHOLDER].join('/')
       ) || null;
     return {
       props: {
